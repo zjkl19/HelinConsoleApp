@@ -12,7 +12,7 @@ namespace HelinConsoleApp
     {
         static void Main(string[] args)
         {
-            //add 2
+            //add 4
             //ldn c8
 
             int t1, t2;
