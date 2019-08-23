@@ -13,7 +13,7 @@ namespace HelinConsoleApp
         static void Main(string[] args)
         {
 
-            //ldn c7
+            //ldn c8
 
             int t1, t2;
 
