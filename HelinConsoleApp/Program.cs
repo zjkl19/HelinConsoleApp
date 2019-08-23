@@ -12,7 +12,9 @@ namespace HelinConsoleApp
     {
         static void Main(string[] args)
         {
-            //ldn1
+
+            //ldn c3
+
             int t1, t2;
 
             var Gross_Load_Div = new int[] { 0,10_000,20_000,30_000 };
