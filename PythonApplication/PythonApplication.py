@@ -17,7 +17,7 @@ from brokenaxes import brokenaxes
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        plt.text(rect.get_x()+rect.get_width()/2.-0.23, 1.03*height, '%s' % height,fontsize=15)
+        plt.text(rect.get_x()+rect.get_width()/2.-0.28, 1.03*height, '%s' % height,fontsize=15)
 
 fontSize=15
 #plt.rcParams['figure.figsize'] = (8.0, 6.0)
@@ -29,12 +29,24 @@ plt.yticks(fontsize=fontSize)
 # 包含每个柱子对应值的序列
 #values = [983272,15157,1433,140]
 
-x_data = [1, 2, 3, 4]
-#y_data = [983272,15157,1433,140]    #车重
-y_data = [17091,31998,91890,237471]    #车速
+
+y_data = [983272,15157,1433,140]    #车重
+#y_data = [17091,31998,91890,237471]    #车速
+y_data = [86973,108276,99618,83583]    #车道
+y_data = [49089,220678,102635,6048]    #车速
+y_data = [int(86973/14),int(108276/14),int(99618/14),int(83583/14)]    #不同车道日均车辆数
+y_data = [11579,6662,6296,30954,46563,43551,33158,35383,45446,49896,41109,27853]    #小时
+
+y_data = [11579,6662,6296,30954,46563,43551,33158,35383,45446,49896,41109,27853]    #小时
+x_data = range(1,13)
 multiples = [x/sum(y_data) for x in y_data]
 
-xticksPrefix=['0～10t','10～20t','20～30t','30t以上']
+xticksPrefix=['0～10t','10～20t','20～30t','30t以上']    #车重
+xticksPrefix=['车道1','车道2','车道3','车道4']    #车道
+xticksPrefix=['0～30km/h','30～50km/h','50～70km/h','70km/h以上']    #车速
+xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']    #小时
+
+xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']
 
 # 柱子总数
 N =len(y_data)
@@ -67,6 +79,18 @@ plt.ylabel("数量",fontsize=15)
 xticksLabel=['%s'%(xticksPrefix[0])+'\n(%.2f%%'%(100*multiples[0])+')']
 for i in range(len(xticksPrefix)):
     plt.xticks(x_data, ['%s'%(xticksPrefix[0])+'\n(%.2f%%'%(100*multiples[0])+')', '%s'%(xticksPrefix[1])+'\n(%.2f%%'%(100*multiples[1])+')', '%s'%(xticksPrefix[2])+'\n(%.2f%%'%(100*multiples[2])+')', '%s'%(xticksPrefix[3])+'\n(%.2f%%'%(100*multiples[3])+')'])
+
+# 添加纵横轴的刻度(不含比例)
+xticksLabel=['%s'%(xticksPrefix[0])]
+for i in range(len(xticksPrefix)):
+    plt.xticks(x_data, ['%s'%(xticksPrefix[0]), '%s'%(xticksPrefix[1]), '%s'%(xticksPrefix[2]), '%s'%(xticksPrefix[3])])
+
+xticksLabel=['%s'%(xticksPrefix[0])+'\n(%.2f%%'%(100*multiples[0])+')']
+for i in range(1,len(xticksPrefix)):
+    xticksLabel=xticksLabel+['%s'%(xticksPrefix[i])+'\n(%.2f%%'%(100*multiples[i])+')']
+
+plt.xticks(x_data, xticksLabel)
+
 
 #plt.xticks([])
 ax = plt.gca()

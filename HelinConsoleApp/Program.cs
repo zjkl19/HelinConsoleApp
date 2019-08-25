@@ -27,6 +27,10 @@ namespace HelinConsoleApp
             {
                 using (var db =new HighSpeed_JCBEntities())
                 {
+                    var g1 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Gross_Load).FirstOrDefault().Gross_Load;
+                    var l1 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Veh_Length).FirstOrDefault().Veh_Length;
+                    Console.WriteLine($"最大车重{g1},车长{l1}");
+
                     //不同区间车重分布
                     for (int i = 0; i < Gross_Load_Div.Length; i++)
                     {
@@ -60,7 +64,7 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
 
-                    var Speed_Div = new int[] { 0, 20, 30, 40 };
+                    var Speed_Div = new int[] { 0, 30, 50, 70 };
                     var Speed_Dist = new List<int>();
                     //不同区间车速分布
                     for (int i = 0; i < Speed_Div.Length; i++)
