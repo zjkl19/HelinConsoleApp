@@ -50,11 +50,11 @@ namespace HelinConsoleApp
                         if (i != Gross_Load_Div.Length - 1)
                         {
                             t2 = Gross_Load_Div[i + 1];
-                            Gross_Load_Dist.Add(db.HS_Data.Where(x => x.Gross_Load >= t1 && x.Gross_Load < t2).Where(dataPredicate).Count());
+                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1 && x.Gross_Load < t2).Where(dataPredicate).Count());
                         }
                         else
                         {
-                            Gross_Load_Dist.Add(db.HS_Data.Where(x => x.Gross_Load >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
                         }
                         Console.WriteLine(Gross_Load_Dist[i]);
                     }
@@ -85,11 +85,11 @@ namespace HelinConsoleApp
                         if (i != Speed_Div.Length - 1)
                         {
                             t2 = Speed_Div[i + 1];
-                            Speed_Dist.Add(db.HS_Data.Where(x => x.Speed >= t1 && x.Speed < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Speed_Dist.Add(table.Where(x => x.Speed >= t1 && x.Speed < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
                         }
                         else
                         {
-                            Speed_Dist.Add(db.HS_Data.Where(x => x.Speed >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Speed_Dist.Add(table.Where(x => x.Speed >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
                         }
                         Console.WriteLine(Speed_Dist[i]);
                     }
@@ -117,7 +117,7 @@ namespace HelinConsoleApp
                     for (int i = 0; i < Lane_Div.Length; i++)
                     {
                         t1 = Lane_Div[i];
-                        Lane_Dist.Add(db.HS_Data.Where(x => x.Lane_Id == t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                        Lane_Dist.Add(table.Where(x => x.Lane_Id == t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
                         Console.WriteLine(Lane_Dist[i]);
                     }
                     try
@@ -149,11 +149,11 @@ namespace HelinConsoleApp
                         {
                             t2 = Hour_Div[i + 1];
                             //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
-                            Hour_Dist.Add(db.HS_Data.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Hour_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
                         }
                         else
                         {
-                            Hour_Dist.Add(db.HS_Data.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Hour_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
                         }
 
                         Console.WriteLine(Hour_Dist[i]);
@@ -187,11 +187,11 @@ namespace HelinConsoleApp
                         {
                             t2 = Hour_Div[i + 1];
                             //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
-                            Hour_Speed_Dist.Add(db.HS_Data.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x=>x.Speed));
+                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x=>x.Speed));
                         }
                         else
                         {
-                            Hour_Speed_Dist.Add(db.HS_Data.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x => x.Speed));
+                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x => x.Speed));
                         }
 
                         Console.WriteLine(Hour_Dist[i]);
@@ -220,7 +220,7 @@ namespace HelinConsoleApp
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
-                        Week_Dist.Add(db.HS_Data.Where(x =>x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
+                        Week_Dist.Add(table.Where(x =>x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try

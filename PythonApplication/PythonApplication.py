@@ -15,6 +15,7 @@ from brokenaxes import brokenaxes
 
 #定义函数来显示柱状上的数值
 def autolabel(rects,y_data):
+    factor=5
     i=0
     space=-0.20
     for rect in rects:
@@ -31,8 +32,9 @@ def autolabel(rects,y_data):
         else:
             space=-0.26
         height = rect.get_height()
-        plt.text(rect.get_x()+rect.get_width()/2.+space*5.0, 1.03*height, '%s' % height,fontsize=15)
+        plt.text(rect.get_x()+rect.get_width()/2.+space*factor, 1.03*height, '%s' % height,fontsize=15)
         i=i+1
+
 fontSize=15
 #plt.rcParams['figure.figsize'] = (8.0, 6.0)
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
@@ -43,14 +45,16 @@ plt.yticks(fontsize=fontSize)
 totalDays=7    #总天数
 
 # 包含每个柱子对应值的序列
-y_data = [333943,5105,639,54]    #车重
-y_data = [77929,97206,89124,75482]    #车道
-y_data = [38635,204613,91268,5225]    #车速
+y_data = [559064,8564,896,85]    #车重
+y_data = [129873,161821,149224,127691]    #车道
+y_data = [81100,83566,79138,81559,84267,80440,78538]    #周一至周日
+y_data = [60254,344582,155304,8469]    #车速
 #y_data = [int(77929/totalDays),int(97206/totalDays),int(89124/totalDays),int(75482/totalDays)]    #不同车道日均车辆数
-y_data = [8915,4994,4784,26106,38978,37899,31443,38116,41328,39592,40428,27157]    #不同小时车辆总数
-y_data = [59.2,61.0,60.1,47.2,33.6,41.3,49.0,42.4,38.9,38.0,44.2,51.6]    #不同小时平均车速
+y_data = [16254,9140,8488,40779,66879,66143,57230,67667,72856,67376,57096,38701]    #不同小时车辆总数
 
-y_data = [59.2,61.0,60.1,47.2,33.6,41.3,49.0,42.4,38.9,38.0,44.2,51.6]    #不同小时平均车速
+y_data = [58.8,60.6,59.7,49.0,36.8,41.6,48.3,42.5,39.2,37.3,43.5,51.0]    #不同小时平均车速
+
+y_data = [58.8,60.6,59.7,49.0,36.8,41.6,48.3,42.5,39.2,37.3,43.5,51.0]    #不同小时平均车速
 
 x_data = range(1,len(y_data)+1)
 multiples = [x/sum(y_data) for x in y_data]
@@ -58,6 +62,7 @@ multiples = [x/sum(y_data) for x in y_data]
 xticksPrefix=['0～10t','10～20t','20～30t','30t以上']    #车重
 xticksPrefix=['车道1','车道2','车道3','车道4']    #车道
 xticksPrefix=['0～30km/h','30～50km/h','50～70km/h','70km/h以上']    #车速
+xticksPrefix=['周一','周二','周三','周四','周五','周六','周日']    #周一至周日
 xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']    #小时
 
 xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']    #小时
@@ -87,7 +92,11 @@ autolabel(p2,y_data)
 
 # 为两条坐标轴设置名称
 #plt.xlabel("年份")
+
 plt.ylabel("车速（km/h）",fontsize=15)
+plt.ylabel("数量",fontsize=15)
+
+plt.ylabel("数量",fontsize=15)
 
 # 添加纵横轴的刻度
 #xticksLabel=['%s'%(xticksPrefix[0])+'\n(%.2f%%'%(100*multiples[0])+')']
@@ -110,7 +119,6 @@ for i in range(1,len(xticksPrefix)):
 xticksLabel=['%s'%(xticksPrefix[0])]
 for i in range(1,len(xticksPrefix)):
     xticksLabel=xticksLabel+['%s'%(xticksPrefix[i])]
-
 
 plt.xticks(x_data, xticksLabel)
 
