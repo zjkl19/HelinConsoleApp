@@ -20,16 +20,19 @@ namespace HelinConsoleApp
             var Gross_Load_Div = new int[] { 0,10_000,20_000,30_000 };
             var Gross_Load_Dist = new List<int>();
 
-            var StartDataTime = new DateTime(2019,8,14,0,0,0);
-            var FinishDataTime = new DateTime(2019, 8, 20, 23, 59, 59);
+            var StartDataTime = new DateTime(2019, 8,10, 0, 0, 0);
+            var FinishDataTime = new DateTime(2019, 8, 17, 0, 0, 0); 
 
             try
             {
                 using (var db =new HighSpeed_JCBEntities())
                 {
+                    //最大车重
                     var g1 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Gross_Load).FirstOrDefault().Gross_Load;
-                    var l1 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Veh_Length).FirstOrDefault().Veh_Length;
-                    Console.WriteLine($"最大车重{g1},车长{l1}");
+                    var s1 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Gross_Load).FirstOrDefault().Speed;
+                    var l1 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Gross_Load).FirstOrDefault().Axle_Num;
+                    var t11 = db.HS_Data.Where(x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).OrderByDescending(x => x.Gross_Load).FirstOrDefault().HSData_DT;
+                    Console.WriteLine($"最大车重{g1},车速{s1},轴数{l1},时间{t11}");
 
                     //不同区间车重分布
                     for (int i = 0; i < Gross_Load_Div.Length; i++)
