@@ -10,6 +10,53 @@ using System.Threading.Tasks;
 
 namespace HelinConsoleApp
 {
+    public class MyHS_Data
+    {
+        public int HSData_Id { get; set; }
+        public Nullable<byte> Lane_Id { get; set; }
+        public Nullable<System.DateTime> HSData_DT { get; set; }
+        public string Oper_Direc { get; set; }
+        public Nullable<byte> Axle_Num { get; set; }
+        public Nullable<byte> AxleGrp_Num { get; set; }
+        public Nullable<int> Gross_Load { get; set; }
+        public Nullable<short> Veh_Type { get; set; }
+        public Nullable<int> LWheel_1_W { get; set; }
+        public Nullable<int> LWheel_2_W { get; set; }
+        public Nullable<int> LWheel_3_W { get; set; }
+        public Nullable<int> LWheel_4_W { get; set; }
+        public Nullable<int> LWheel_5_W { get; set; }
+        public Nullable<int> LWheel_6_W { get; set; }
+        public Nullable<int> LWheel_7_W { get; set; }
+        public Nullable<int> LWheel_8_W { get; set; }
+        public Nullable<int> RWheel_1_W { get; set; }
+        public Nullable<int> RWheel_2_W { get; set; }
+        public Nullable<int> RWheel_3_W { get; set; }
+        public Nullable<int> RWheel_4_W { get; set; }
+        public Nullable<int> RWheel_5_W { get; set; }
+        public Nullable<int> RWheel_6_W { get; set; }
+        public Nullable<int> RWheel_7_W { get; set; }
+        public Nullable<int> RWheel_8_W { get; set; }
+        public Nullable<int> AxleDis1 { get; set; }
+        public Nullable<int> AxleDis2 { get; set; }
+        public Nullable<int> AxleDis3 { get; set; }
+        public Nullable<int> AxleDis4 { get; set; }
+        public Nullable<int> AxleDis5 { get; set; }
+        public Nullable<int> AxleDis6 { get; set; }
+        public Nullable<int> AxleDis7 { get; set; }
+        public Nullable<int> Violation_Id { get; set; }
+        public Nullable<byte> OverLoad_Sign { get; set; }
+        public Nullable<int> Speed { get; set; }
+        public Nullable<decimal> Acceleration { get; set; }
+        public Nullable<int> Veh_Length { get; set; }
+        public Nullable<decimal> QAT { get; set; }
+        public string License_Plate { get; set; }
+        public string License_Plate_Color { get; set; }
+        public string F7Code { get; set; }
+        public Nullable<float> ExternInfo { get; set; }
+        public Nullable<int> Temp { get; set; }
+        public Nullable<int> SiteID { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -19,27 +66,119 @@ namespace HelinConsoleApp
 
             int t1, t2;
 
-            var Gross_Load_Div = new int[] { 0,10_000,20_000,30_000 };
+            var Gross_Load_Div = new int[] { 0, 10_000, 20_000, 30_000 };
             var Gross_Load_Dist = new List<int>();
 
-            var StartDataTime = new DateTime(2019,8,9,0,0,0);
+            var StartDataTime = new DateTime(2019, 8, 9, 0, 0, 0);
             var FinishDataTime = new DateTime(2019, 8, 16, 0, 0, 0);
 
-            Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
+
+            //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
             try
             {
-                using (var db =new HighSpeed_JCBEntities())
+                using (var db = new HighSpeed_JCBEntities())
                 {
-                    var table = db.HS_Data_201908;
+                    #region HS_DataForAnalysis
+                    var HS_DataForAnalysis = (
+                        from c in db.HS_Data_201908
+                        select new MyHS_Data
+                        {
+                            Acceleration = c.Acceleration,
+                            AxleGrp_Num = c.AxleGrp_Num,
+                            Axle_Num = c.Axle_Num,
+                            ExternInfo = c.ExternInfo,
+                            F7Code = c.F7Code,
+                            HSData_Id = c.HSData_Id,
+                            Veh_Length = c.Veh_Length,
+                            Veh_Type = c.Veh_Type,
+                            LWheel_1_W = c.LWheel_1_W,
+                            LWheel_2_W = c.LWheel_2_W,
+                            LWheel_3_W = c.LWheel_3_W,
+                            LWheel_4_W = c.LWheel_4_W,
+                            LWheel_5_W = c.LWheel_5_W,
+                            LWheel_6_W = c.LWheel_6_W,
+                            LWheel_7_W = c.LWheel_7_W,
+                            LWheel_8_W = c.LWheel_8_W,
+                            Lane_Id = c.Lane_Id,
+                            Oper_Direc = c.Oper_Direc,
+                            Speed = c.Speed,
+                            OverLoad_Sign = c.OverLoad_Sign,
+                            RWheel_1_W = c.RWheel_1_W,
+                            RWheel_2_W = c.RWheel_2_W,
+                            RWheel_3_W = c.RWheel_3_W,
+                            RWheel_4_W = c.RWheel_4_W,
+                            RWheel_5_W = c.RWheel_5_W,
+                            RWheel_6_W = c.RWheel_6_W,
+                            RWheel_7_W = c.RWheel_7_W,
+                            RWheel_8_W = c.RWheel_8_W,
+                            Violation_Id = c.Violation_Id,
+                            AxleDis1 = c.AxleDis1,
+                            AxleDis2 = c.AxleDis2,
+                            AxleDis3 = c.AxleDis3,
+                            AxleDis4 = c.AxleDis4,
+                            AxleDis5 = c.AxleDis5,
+                            AxleDis6 = c.AxleDis6,
+                            AxleDis7 = c.AxleDis7,
+                            HSData_DT = c.HSData_DT,
+                            Gross_Load = c.Gross_Load
+                        }
+                        ).Union(
+                        from e in db.HS_Data_201909
+                        select new MyHS_Data
+                        {
+                            Acceleration = e.Acceleration,
+                            AxleGrp_Num = e.AxleGrp_Num,
+                            Axle_Num = e.Axle_Num,
+                            ExternInfo = e.ExternInfo,
+                            F7Code = e.F7Code,
+                            HSData_Id = e.HSData_Id,
+                            Veh_Length = e.Veh_Length,
+                            Veh_Type = e.Veh_Type,
+                            LWheel_1_W = e.LWheel_1_W,
+                            LWheel_2_W = e.LWheel_2_W,
+                            LWheel_3_W = e.LWheel_3_W,
+                            LWheel_4_W = e.LWheel_4_W,
+                            LWheel_5_W = e.LWheel_5_W,
+                            LWheel_6_W = e.LWheel_6_W,
+                            LWheel_7_W = e.LWheel_7_W,
+                            LWheel_8_W = e.LWheel_8_W,
+                            Lane_Id = e.Lane_Id,
+                            Oper_Direc = e.Oper_Direc,
+                            Speed = e.Speed,
+                            OverLoad_Sign = e.OverLoad_Sign,
+                            RWheel_1_W = e.RWheel_1_W,
+                            RWheel_2_W = e.RWheel_2_W,
+                            RWheel_3_W = e.RWheel_3_W,
+                            RWheel_4_W = e.RWheel_4_W,
+                            RWheel_5_W = e.RWheel_5_W,
+                            RWheel_6_W = e.RWheel_6_W,
+                            RWheel_7_W = e.RWheel_7_W,
+                            RWheel_8_W = e.RWheel_8_W,
+                            Violation_Id = e.Violation_Id,
+                            AxleDis1 = e.AxleDis1,
+                            AxleDis2 = e.AxleDis2,
+                            AxleDis3 = e.AxleDis3,
+                            AxleDis4 = e.AxleDis4,
+                            AxleDis5 = e.AxleDis5,
+                            AxleDis6 = e.AxleDis6,
+                            AxleDis7 = e.AxleDis7,
+                            HSData_DT = e.HSData_DT,
+                            Gross_Load = e.Gross_Load
+                        }
+                        );
+                    #endregion
+                    Expression<Func<MyHS_Data, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT < FinishDataTime;
 
-                    var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).FirstOrDefault();
+                    var table = HS_DataForAnalysis;
+
+                    var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).ToList().FirstOrDefault();
                     var g1 = maxGross_Load_Vehicle.Gross_Load;
                     var c1 = maxGross_Load_Vehicle.Axle_Num;
 
-                    var l1 = maxGross_Load_Vehicle.AxleDis1+ maxGross_Load_Vehicle.AxleDis2+ maxGross_Load_Vehicle.AxleDis3
-                        + maxGross_Load_Vehicle.AxleDis4+ maxGross_Load_Vehicle.AxleDis5+ maxGross_Load_Vehicle.AxleDis6+ maxGross_Load_Vehicle.AxleDis7;
-                    
+                    var l1 = maxGross_Load_Vehicle.AxleDis1 + maxGross_Load_Vehicle.AxleDis2 + maxGross_Load_Vehicle.AxleDis3
+                        + maxGross_Load_Vehicle.AxleDis4 + maxGross_Load_Vehicle.AxleDis5 + maxGross_Load_Vehicle.AxleDis6 + maxGross_Load_Vehicle.AxleDis7;
+
 
                     Console.WriteLine($"最大车重{g1},轴数{c1}轴距{l1}");
 
@@ -187,7 +326,7 @@ namespace HelinConsoleApp
                         {
                             t2 = Hour_Div[i + 1];
                             //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
-                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x=>x.Speed));
+                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x => x.Speed));
                         }
                         else
                         {
@@ -215,12 +354,12 @@ namespace HelinConsoleApp
                     }
 
                     //周一至周日车辆数分布
-                    var Week_Div = new int[] { 12, 13, 14, 15 ,9,10,11};
+                    var Week_Div = new int[] { 12, 13, 14, 15, 9, 10, 11 };
                     var Week_Dist = new List<int>();
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
-                        Week_Dist.Add(table.Where(x =>x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
+                        Week_Dist.Add(table.Where(x => x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try
@@ -241,6 +380,7 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
                 }
+                Console.WriteLine($"计算完成！");
             }
             catch (Exception ex)
             {

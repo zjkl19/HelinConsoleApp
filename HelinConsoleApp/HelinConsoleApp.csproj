@@ -83,6 +83,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Program - bak.cs" />
+    <Compile Include="Program - 复制%282%29.cs" />
+    <Compile Include="Program - 复制.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
