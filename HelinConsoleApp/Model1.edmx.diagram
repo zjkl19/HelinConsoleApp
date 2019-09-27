@@ -4,9 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="728d73fa03084bd6b4d1bf4fa1c12e97" Name="Diagram1">
+      <Diagram DiagramId="ab45cbcba3464b96b01aae19d4894e34" Name="Diagram1">
         <EntityTypeShape EntityType="HighSpeed_JCBModel.HS_Data" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HighSpeed_JCBModel.HS_Data_201908" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HighSpeed_JCBModel.HS_Data_201907" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HighSpeed_JCBModel.HS_Data_201908" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HighSpeed_JCBModel.HS_Data_201909" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HighSpeed_JCBModel.HS_Data_201910" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

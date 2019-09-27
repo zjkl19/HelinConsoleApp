@@ -26,6 +26,9 @@ namespace HelinConsoleApp
         }
     
         public virtual DbSet<HS_Data> HS_Data { get; set; }
+        public virtual DbSet<HS_Data_201907> HS_Data_201907 { get; set; }
         public virtual DbSet<HS_Data_201908> HS_Data_201908 { get; set; }
+        public virtual DbSet<HS_Data_201909> HS_Data_201909 { get; set; }
+        public virtual DbSet<HS_Data_201910> HS_Data_201910 { get; set; }
     }
 }
