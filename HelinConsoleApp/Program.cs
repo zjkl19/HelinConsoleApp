@@ -180,7 +180,9 @@ namespace HelinConsoleApp
                         + maxGross_Load_Vehicle.AxleDis4 + maxGross_Load_Vehicle.AxleDis5 + maxGross_Load_Vehicle.AxleDis6 + maxGross_Load_Vehicle.AxleDis7;
 
 
-                    Console.WriteLine($"最大车重{g1},轴数{c1}轴距{l1}");
+                    Console.WriteLine($"最大车重{g1},轴数{c1},轴距{l1}={maxGross_Load_Vehicle.AxleDis1}+{maxGross_Load_Vehicle.AxleDis2}" +
+                        $"+{maxGross_Load_Vehicle.AxleDis3}+{maxGross_Load_Vehicle.AxleDis4}+{maxGross_Load_Vehicle.AxleDis5 }" +
+                        $"+{maxGross_Load_Vehicle.AxleDis6}+{maxGross_Load_Vehicle.AxleDis7}");
 
                     //不同区间车重分布
                     for (int i = 0; i < Gross_Load_Div.Length; i++)
