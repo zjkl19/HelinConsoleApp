@@ -69,8 +69,8 @@ namespace HelinConsoleApp
             var Gross_Load_Div = new int[] { 0, 10_000, 20_000, 30_000 };
             var Gross_Load_Dist = new List<int>();
 
-            var StartDataTime = new DateTime(2019, 8, 9, 0, 0, 0);
-            var FinishDataTime = new DateTime(2019, 8, 16, 0, 0, 0);
+            var StartDataTime = new DateTime(2019, 8, 21, 0, 0, 0);
+            var FinishDataTime = new DateTime(2019, 9, 21, 0, 0, 0);
 
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
@@ -172,7 +172,7 @@ namespace HelinConsoleApp
 
                     var table = HS_DataForAnalysis;
 
-                    var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).ToList().FirstOrDefault();
+                    var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).FirstOrDefault();
                     var g1 = maxGross_Load_Vehicle.Gross_Load;
                     var c1 = maxGross_Load_Vehicle.Axle_Num;
 
@@ -193,7 +193,7 @@ namespace HelinConsoleApp
                         }
                         else
                         {
-                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1).Where(dataPredicate).Count());
                         }
                         Console.WriteLine(Gross_Load_Dist[i]);
                     }
@@ -224,11 +224,11 @@ namespace HelinConsoleApp
                         if (i != Speed_Div.Length - 1)
                         {
                             t2 = Speed_Div[i + 1];
-                            Speed_Dist.Add(table.Where(x => x.Speed >= t1 && x.Speed < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Speed_Dist.Add(table.Where(x => x.Speed >= t1 && x.Speed < t2).Where(dataPredicate).Count());
                         }
                         else
                         {
-                            Speed_Dist.Add(table.Where(x => x.Speed >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Speed_Dist.Add(table.Where(x => x.Speed >= t1).Where(dataPredicate).Count());
                         }
                         Console.WriteLine(Speed_Dist[i]);
                     }
@@ -256,7 +256,7 @@ namespace HelinConsoleApp
                     for (int i = 0; i < Lane_Div.Length; i++)
                     {
                         t1 = Lane_Div[i];
-                        Lane_Dist.Add(table.Where(x => x.Lane_Id == t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                        Lane_Dist.Add(table.Where(x => x.Lane_Id == t1).Where(dataPredicate).Count());
                         Console.WriteLine(Lane_Dist[i]);
                     }
                     try
@@ -288,11 +288,11 @@ namespace HelinConsoleApp
                         {
                             t2 = Hour_Div[i + 1];
                             //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
-                            Hour_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Hour_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2).Where(dataPredicate).Count());
                         }
                         else
                         {
-                            Hour_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Count());
+                            Hour_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1).Where(dataPredicate).Count());
                         }
 
                         Console.WriteLine(Hour_Dist[i]);
@@ -326,11 +326,11 @@ namespace HelinConsoleApp
                         {
                             t2 = Hour_Div[i + 1];
                             //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
-                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x => x.Speed));
+                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2).Where(dataPredicate).Average(x => x.Speed));
                         }
                         else
                         {
-                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime).Average(x => x.Speed));
+                            Hour_Speed_Dist.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1).Where(dataPredicate).Average(x => x.Speed));
                         }
 
                         Console.WriteLine(Hour_Dist[i]);

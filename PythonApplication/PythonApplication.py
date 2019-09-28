@@ -15,7 +15,12 @@ from brokenaxes import brokenaxes
 
 #定义函数来显示柱状上的数值
 def autolabel(rects,y_data):
-    factor=5
+    if(len(rects.patches)<=6):    #个数
+        factor=1
+    elif (len(rects.patches)<=8):
+        factor=2
+    else:
+        factor=2.8
     i=0
     space=-0.20
     for rect in rects:
@@ -26,14 +31,23 @@ def autolabel(rects,y_data):
         elif 10000>y_data[i]>=1000:
             space=-0.10
         elif 100000>y_data[i]>=10000:
-            space=-0.18
+            space=-0.14
         elif 1000000>y_data[i]>=100000:
-            space=-0.20
+            space=-0.16
         else:
-            space=-0.26
+            space=-0.18
         height = rect.get_height()
         plt.text(rect.get_x()+rect.get_width()/2.+space*factor, 1.03*height, '%s' % height,fontsize=15)
         i=i+1
+
+itemChosen=5    #0~5
+
+#车重
+#车道
+#车速
+#周一至周日
+#不同小时车辆总数
+#不同小时平均车速
 
 fontSize=15
 #plt.rcParams['figure.figsize'] = (8.0, 6.0)
@@ -44,28 +58,58 @@ plt.yticks(fontsize=fontSize)
 
 totalDays=7    #总天数
 
-# 包含每个柱子对应值的序列
-y_data = [559064,8564,896,85]    #车重
-y_data = [129873,161821,149224,127691]    #车道
-y_data = [81100,83566,79138,81559,84267,80440,78538]    #周一至周日
-y_data = [60254,344582,155304,8469]    #车速
-#y_data = [int(77929/totalDays),int(97206/totalDays),int(89124/totalDays),int(75482/totalDays)]    #不同车道日均车辆数
-y_data = [16254,9140,8488,40779,66879,66143,57230,67667,72856,67376,57096,38701]    #不同小时车辆总数
 
-y_data = [58.8,60.6,59.7,49.0,36.8,41.6,48.3,42.5,39.2,37.3,43.5,51.0]    #不同小时平均车速
+#车重
+#车道
+#车速
+#周一至周日
+#不同小时车辆总数
+#不同小时平均车速
+y_dataList=[
+[2464623,38589,3826,444],
+[572247,715894,662534,556807],
+[84873,72122,73096,78501,81604,81276,82651],
+[328598,1487069,657741,34074],
+[69911,38924,35443,188478,292562,296935,264533,309169,320518,282046,244703,164260],
+[58.6,60.8,59.6,47.2,36.5,40.9,47.0,41.4,38.0,36.0,43.5,50.6]
+]
 
-y_data = [58.8,60.6,59.7,49.0,36.8,41.6,48.3,42.5,39.2,37.3,43.5,51.0]    #不同小时平均车速
+## 包含每个柱子对应值的序列
+#y_data = [2464623,38589,3826,444]    #车重
+#y_data = [572247,715894,662534,556807]    #车道
+#y_data = [84873,72122,73096,78501,81604,81276,82651]    #周一至周日
+#y_data = [328598,1487069,657741,34074]    #车速
+##y_data = [int(77929/totalDays),int(97206/totalDays),int(89124/totalDays),int(75482/totalDays)]    #不同车道日均车辆数
+#y_data = [69911,38924,35443,188478,292562,296935,264533,309169,320518,282046,244703,164260]    #不同小时车辆总数
+#y_data = [58.6,60.8,59.6,47.2,36.5,40.9,47.0,41.4,38.0,36.0,43.5,50.6]    #不同小时平均车速
+
+y_data = y_dataList[itemChosen]    #不同小时平均车速
 
 x_data = range(1,len(y_data)+1)
 multiples = [x/sum(y_data) for x in y_data]
 
-xticksPrefix=['0～10t','10～20t','20～30t','30t以上']    #车重
-xticksPrefix=['车道1','车道2','车道3','车道4']    #车道
-xticksPrefix=['0～30km/h','30～50km/h','50～70km/h','70km/h以上']    #车速
-xticksPrefix=['周一','周二','周三','周四','周五','周六','周日']    #周一至周日
-xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']    #小时
+#车重
+#车道
+#车速
+#周一至周日
+#不同小时车辆总数
+#不同小时平均车速
+xticksPrefixList=[
+['0～10t','10～20t','20～30t','30t以上'],
+['车道1','车道2','车道3','车道4'],
+['周一','周二','周三','周四','周五','周六','周日'],
+['0～30km/h','30～50km/h','50～70km/h','70km/h以上'],
+['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24'],
+['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']
+]
 
-xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']    #小时
+xticksPrefix=xticksPrefixList[itemChosen]
+
+#xticksPrefix=['0～10t','10～20t','20～30t','30t以上']    #车重
+#xticksPrefix=['车道1','车道2','车道3','车道4']    #车道
+#xticksPrefix=['0～30km/h','30～50km/h','50～70km/h','70km/h以上']    #车速
+#xticksPrefix=['周一','周二','周三','周四','周五','周六','周日']    #周一至周日
+#xticksPrefix=['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']    #小时
 
 # 柱子总数
 N =len(y_data)
@@ -108,17 +152,24 @@ plt.ylabel("数量",fontsize=15)
 #for i in range(len(xticksPrefix)):
 #    plt.xticks(x_data, ['%s'%(xticksPrefix[0]), '%s'%(xticksPrefix[1]), '%s'%(xticksPrefix[2]), '%s'%(xticksPrefix[3])])
 
-xticksLabel=['%s'%(xticksPrefix[0])+'\n(%.2f%%'%(100*multiples[0])+')']
-for i in range(1,len(xticksPrefix)):
-    xticksLabel=xticksLabel+['%s'%(xticksPrefix[i])+'\n(%.2f%%'%(100*multiples[i])+')']
+xticksLabelList=[]
 
-xticksLabel=['%s'%(xticksPrefix[0])]
+xticksLabel1=['%s'%(xticksPrefix[0])+'\n(%.2f%%'%(100*multiples[0])+')']
 for i in range(1,len(xticksPrefix)):
-    xticksLabel=xticksLabel+['%s'%(xticksPrefix[i])]
+    xticksLabel1=xticksLabel1+['%s'%(xticksPrefix[i])+'\n(%.2f%%'%(100*multiples[i])+')']
 
-xticksLabel=['%s'%(xticksPrefix[0])]
+xticksLabel2=['%s'%(xticksPrefix[0])]
 for i in range(1,len(xticksPrefix)):
-    xticksLabel=xticksLabel+['%s'%(xticksPrefix[i])]
+    xticksLabel2=xticksLabel2+['%s'%(xticksPrefix[i])]
+
+xticksLabelList.append(xticksLabel1)
+xticksLabelList.append(xticksLabel1)
+xticksLabelList.append(xticksLabel1)
+xticksLabelList.append(xticksLabel2)
+xticksLabelList.append(xticksLabel2)
+xticksLabelList.append(xticksLabel2)
+
+xticksLabel=xticksLabelList[itemChosen]
 
 plt.xticks(x_data, xticksLabel)
 
