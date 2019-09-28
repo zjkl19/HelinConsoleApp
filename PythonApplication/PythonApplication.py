@@ -15,27 +15,59 @@ from brokenaxes import brokenaxes
 
 #定义函数来显示柱状上的数值
 def autolabel(rects,y_data):
-    if(len(rects.patches)<=6):    #个数
-        factor=1
-    elif (len(rects.patches)<=8):
-        factor=2
-    else:
-        factor=2.8
+
     i=0
+    factor=1
     space=-0.20
     for rect in rects:
         if 100>y_data[i]>=0:
             space=-0.05
+            if(len(rects.patches)<=6):    #个数
+                factor=2
+            elif (len(rects.patches)<=8):
+                factor=4
+            else:
+                factor=5
         elif 1000>y_data[i]>=100:
             space=-0.08
+            if(len(rects.patches)<=6):
+                factor=1
+            elif (len(rects.patches)<=8):
+                factor=2
+            else:
+                factor=2.8
         elif 10000>y_data[i]>=1000:
             space=-0.10
+            if(len(rects.patches)<=6):
+                factor=1
+            elif (len(rects.patches)<=8):
+                factor=2
+            else:
+                factor=2.8
         elif 100000>y_data[i]>=10000:
             space=-0.14
+            if(len(rects.patches)<=6):
+                factor=1
+            elif (len(rects.patches)<=8):
+                factor=2
+            else:
+                factor=2.8
         elif 1000000>y_data[i]>=100000:
             space=-0.16
+            if(len(rects.patches)<=6):    #个数
+                factor=1
+            elif (len(rects.patches)<=8):
+                factor=2
+            else:
+                factor=2.8
         else:
             space=-0.18
+            if(len(rects.patches)<=6):    #个数
+                factor=1
+            elif (len(rects.patches)<=8):
+                factor=2
+            else:
+                factor=2.8
         height = rect.get_height()
         plt.text(rect.get_x()+rect.get_width()/2.+space*factor, 1.03*height, '%s' % height,fontsize=15)
         i=i+1
