@@ -381,6 +381,44 @@ namespace HelinConsoleApp
                     {
                         Console.WriteLine(ex.Message);
                     }
+
+                    Hour_Div = new int[] { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22 };
+                    var Hour_Weight = new List<int>();
+
+                    //不同区间小时大于40t车数量
+                    for (int i = 0; i < Hour_Div.Length; i++)
+                    {
+                        t1 = Hour_Div[i];
+                        if (i != Hour_Div.Length - 1)
+                        {
+                            t2 = Hour_Div[i + 1];
+                            //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
+                            Hour_Weight.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2).Where(dataPredicate).Where(x=>x.Gross_Load>40000).Count());
+                        }
+                        else
+                        {
+                            Hour_Weight.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1).Where(dataPredicate).Where(x => x.Gross_Load > 40000).Count());
+                        }
+
+                        Console.WriteLine(Hour_Weight[i]);
+                    }
+                    try
+                    {
+                        var fs = new FileStream("不同区间小时大于40t车数量.txt", FileMode.Create);
+                        var sw = new StreamWriter(fs, Encoding.Default);
+                        var writeString = $"{Hour_Weight[0]}";
+                        for (int i = 1; i < Hour_Div.Length; i++)
+                        {
+                            writeString = $"{writeString},{Hour_Weight[i]}";
+                        }
+                        sw.Write(writeString);
+                        sw.Close();
+                        fs.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
                 Console.WriteLine($"计算完成！");
             }
