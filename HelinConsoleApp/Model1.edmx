@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HighSpeed_JCBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HighSpeed_JCBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="HS_Data">
           <Key>
             <PropertyRef Name="HSData_Id" />
@@ -242,15 +242,62 @@
           <Property Name="ExternInfo" Type="real" />
           <Property Name="Temp" Type="int" />
         </EntityType>
+        <EntityType Name="HS_Data_201911">
+          <Key>
+            <PropertyRef Name="HSData_Id" />
+          </Key>
+          <Property Name="HSData_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lane_Id" Type="tinyint" />
+          <Property Name="HSData_DT" Type="datetime" />
+          <Property Name="Oper_Direc" Type="varchar" MaxLength="10" />
+          <Property Name="Axle_Num" Type="tinyint" />
+          <Property Name="AxleGrp_Num" Type="tinyint" />
+          <Property Name="Gross_Load" Type="int" />
+          <Property Name="Veh_Type" Type="smallint" />
+          <Property Name="LWheel_1_W" Type="int" />
+          <Property Name="LWheel_2_W" Type="int" />
+          <Property Name="LWheel_3_W" Type="int" />
+          <Property Name="LWheel_4_W" Type="int" />
+          <Property Name="LWheel_5_W" Type="int" />
+          <Property Name="LWheel_6_W" Type="int" />
+          <Property Name="LWheel_7_W" Type="int" />
+          <Property Name="LWheel_8_W" Type="int" />
+          <Property Name="RWheel_1_W" Type="int" />
+          <Property Name="RWheel_2_W" Type="int" />
+          <Property Name="RWheel_3_W" Type="int" />
+          <Property Name="RWheel_4_W" Type="int" />
+          <Property Name="RWheel_5_W" Type="int" />
+          <Property Name="RWheel_6_W" Type="int" />
+          <Property Name="RWheel_7_W" Type="int" />
+          <Property Name="RWheel_8_W" Type="int" />
+          <Property Name="AxleDis1" Type="int" />
+          <Property Name="AxleDis2" Type="int" />
+          <Property Name="AxleDis3" Type="int" />
+          <Property Name="AxleDis4" Type="int" />
+          <Property Name="AxleDis5" Type="int" />
+          <Property Name="AxleDis6" Type="int" />
+          <Property Name="AxleDis7" Type="int" />
+          <Property Name="Violation_Id" Type="int" />
+          <Property Name="OverLoad_Sign" Type="tinyint" />
+          <Property Name="Speed" Type="int" />
+          <Property Name="Acceleration" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Veh_Length" Type="int" />
+          <Property Name="QAT" Type="numeric" Precision="14" Scale="4" />
+          <Property Name="License_Plate" Type="nvarchar" MaxLength="12" />
+          <Property Name="License_Plate_Color" Type="nvarchar" MaxLength="12" />
+          <Property Name="F7Code" Type="nvarchar" MaxLength="56" />
+          <Property Name="ExternInfo" Type="real" />
+          <Property Name="Temp" Type="int" />
+        </EntityType>
         <EntityContainer Name="HighSpeed_JCBModelStoreContainer">
           <EntitySet Name="HS_Data" EntityType="Self.HS_Data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_201907" EntityType="Self.HS_Data_201907" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_201908" EntityType="Self.HS_Data_201908" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_201909" EntityType="Self.HS_Data_201909" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_201910" EntityType="Self.HS_Data_201910" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HS_Data_201911" EntityType="Self.HS_Data_201911" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HighSpeed_JCBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -497,7 +544,55 @@
           <EntitySet Name="HS_Data_201908" EntityType="Self.HS_Data_201908" />
           <EntitySet Name="HS_Data_201909" EntityType="Self.HS_Data_201909" />
           <EntitySet Name="HS_Data_201910" EntityType="Self.HS_Data_201910" />
+          <EntitySet Name="HS_Data_201911" EntityType="HighSpeed_JCBModel.HS_Data_201911" />
         </EntityContainer>
+        <EntityType Name="HS_Data_201911">
+          <Key>
+            <PropertyRef Name="HSData_Id" />
+          </Key>
+          <Property Name="HSData_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lane_Id" Type="Byte" />
+          <Property Name="HSData_DT" Type="DateTime" Precision="3" />
+          <Property Name="Oper_Direc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Axle_Num" Type="Byte" />
+          <Property Name="AxleGrp_Num" Type="Byte" />
+          <Property Name="Gross_Load" Type="Int32" />
+          <Property Name="Veh_Type" Type="Int16" />
+          <Property Name="LWheel_1_W" Type="Int32" />
+          <Property Name="LWheel_2_W" Type="Int32" />
+          <Property Name="LWheel_3_W" Type="Int32" />
+          <Property Name="LWheel_4_W" Type="Int32" />
+          <Property Name="LWheel_5_W" Type="Int32" />
+          <Property Name="LWheel_6_W" Type="Int32" />
+          <Property Name="LWheel_7_W" Type="Int32" />
+          <Property Name="LWheel_8_W" Type="Int32" />
+          <Property Name="RWheel_1_W" Type="Int32" />
+          <Property Name="RWheel_2_W" Type="Int32" />
+          <Property Name="RWheel_3_W" Type="Int32" />
+          <Property Name="RWheel_4_W" Type="Int32" />
+          <Property Name="RWheel_5_W" Type="Int32" />
+          <Property Name="RWheel_6_W" Type="Int32" />
+          <Property Name="RWheel_7_W" Type="Int32" />
+          <Property Name="RWheel_8_W" Type="Int32" />
+          <Property Name="AxleDis1" Type="Int32" />
+          <Property Name="AxleDis2" Type="Int32" />
+          <Property Name="AxleDis3" Type="Int32" />
+          <Property Name="AxleDis4" Type="Int32" />
+          <Property Name="AxleDis5" Type="Int32" />
+          <Property Name="AxleDis6" Type="Int32" />
+          <Property Name="AxleDis7" Type="Int32" />
+          <Property Name="Violation_Id" Type="Int32" />
+          <Property Name="OverLoad_Sign" Type="Byte" />
+          <Property Name="Speed" Type="Int32" />
+          <Property Name="Acceleration" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Veh_Length" Type="Int32" />
+          <Property Name="QAT" Type="Decimal" Precision="14" Scale="4" />
+          <Property Name="License_Plate" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="License_Plate_Color" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="F7Code" Type="String" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Name="ExternInfo" Type="Single" />
+          <Property Name="Temp" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -743,6 +838,54 @@
                 <ScalarProperty Name="F7Code" ColumnName="F7Code" />
                 <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
                 <ScalarProperty Name="Temp" ColumnName="Temp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HS_Data_201911">
+            <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_201911">
+              <MappingFragment StoreEntitySet="HS_Data_201911">
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
