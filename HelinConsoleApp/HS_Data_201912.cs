@@ -12,7 +12,7 @@ namespace HelinConsoleApp
     using System;
     using System.Collections.Generic;
     
-    public partial class HS_Data_201911
+    public partial class HS_Data_201912
     {
         public int HSData_Id { get; set; }
         public Nullable<byte> Lane_Id { get; set; }

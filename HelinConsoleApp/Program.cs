@@ -66,22 +66,23 @@ namespace HelinConsoleApp
 
             int t1, t2;
 
-            var Gross_Load_Div = new int[] { 0, 10_000, 20_000, 30_000 };
+            var Gross_Load_Div = new int[] { 0, 10_000, 30_000, 50_000 };
             var Gross_Load_Dist = new List<int>();
+            var Gross_Load_Dist2 = new List<int>();
 
-            var StartDataTime = new DateTime(2019, 10, 21, 0, 0, 0);
-            var FinishDataTime = new DateTime(2019, 11, 21, 0, 0, 0);
+            var StartDataTime = new DateTime(2019, 11, 15, 0, 0, 0);
+            var FinishDataTime = new DateTime(2019, 11, 30, 23, 59, 59);
 
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
             try
             {
-                using (var db = new HighSpeed_JCBEntities())
+                using (var db = new HighSpeed_DZQEntities())
                 {
                     #region HS_DataForAnalysis
                     var HS_DataForAnalysis = (
-                        from c in db.HS_Data_201910
+                        from c in db.HS_Data_201911
                         select new MyHS_Data
                         {
                             Acceleration = c.Acceleration,
@@ -124,7 +125,7 @@ namespace HelinConsoleApp
                             Gross_Load = c.Gross_Load
                         }
                         ).Union(
-                        from e in db.HS_Data_201911
+                        from e in db.HS_Data_201912
                         select new MyHS_Data
                         {
                             Acceleration = e.Acceleration,
@@ -184,24 +185,24 @@ namespace HelinConsoleApp
                         $"+{maxGross_Load_Vehicle.AxleDis3}+{maxGross_Load_Vehicle.AxleDis4}+{maxGross_Load_Vehicle.AxleDis5 }" +
                         $"+{maxGross_Load_Vehicle.AxleDis6}+{maxGross_Load_Vehicle.AxleDis7}");
 
-                    //不同区间车重分布
+                    //车道1不同区间车重分布
                     for (int i = 0; i < Gross_Load_Div.Length; i++)
                     {
                         t1 = Gross_Load_Div[i];
                         if (i != Gross_Load_Div.Length - 1)
                         {
                             t2 = Gross_Load_Div[i + 1];
-                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1 && x.Gross_Load < t2).Where(dataPredicate).Count());
+                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1 && x.Gross_Load < t2 && x.Lane_Id==1).Where(dataPredicate).Count());
                         }
                         else
                         {
-                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1).Where(dataPredicate).Count());
+                            Gross_Load_Dist.Add(table.Where(x => x.Gross_Load >= t1 && x.Lane_Id ==1).Where(dataPredicate).Count());
                         }
                         Console.WriteLine(Gross_Load_Dist[i]);
                     }
                     try    //结果写入txt（以逗号分隔）
                     {
-                        var fs = new FileStream("不同车重区间车辆数.txt", FileMode.Create);
+                        var fs = new FileStream("车道1不同车重区间车辆数.txt", FileMode.Create);
                         var sw = new StreamWriter(fs, Encoding.Default);
                         var writeString = $"{Gross_Load_Dist[0]}";
                         for (int i = 1; i < Gross_Load_Div.Length; i++)
@@ -217,7 +218,40 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
 
-                    var Speed_Div = new int[] { 0, 30, 50, 70 };
+                    //车道2不同区间车重分布
+                    for (int i = 0; i < Gross_Load_Div.Length; i++)
+                    {
+                        t1 = Gross_Load_Div[i];
+                        if (i != Gross_Load_Div.Length - 1)
+                        {
+                            t2 = Gross_Load_Div[i + 1];
+                            Gross_Load_Dist2.Add(table.Where(x => x.Gross_Load >= t1 && x.Gross_Load < t2 && x.Lane_Id == 2).Where(dataPredicate).Count());
+                        }
+                        else
+                        {
+                            Gross_Load_Dist2.Add(table.Where(x => x.Gross_Load >= t1 && x.Lane_Id == 2).Where(dataPredicate).Count());
+                        }
+                        Console.WriteLine(Gross_Load_Dist2[i]);
+                    }
+                    try    //结果写入txt（以逗号分隔）
+                    {
+                        var fs = new FileStream("车道2不同车重区间车辆数.txt", FileMode.Create);
+                        var sw = new StreamWriter(fs, Encoding.Default);
+                        var writeString = $"{Gross_Load_Dist2[0]}";
+                        for (int i = 1; i < Gross_Load_Div.Length; i++)
+                        {
+                            writeString = $"{writeString},{Gross_Load_Dist2[i]}";
+                        }
+                        sw.Write(writeString);
+                        sw.Close();
+                        fs.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
+                    var Speed_Div = new int[] { 0, 20, 40, 60 };
                     var Speed_Dist = new List<int>();
                     //不同区间车速分布
                     for (int i = 0; i < Speed_Div.Length; i++)
@@ -252,8 +286,8 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
 
-                    //不同车道分布
-                    var Lane_Div = new int[] { 1, 2, 3, 4 };
+                    //不同车道分布（大樟桥咱不需要，因为明显其中1个车道重车多，另1个车道重车少）
+                    var Lane_Div = new int[] { 1, 2 };
                     var Lane_Dist = new List<int>();
                     for (int i = 0; i < Lane_Div.Length; i++)
                     {
@@ -320,7 +354,7 @@ namespace HelinConsoleApp
                     Hour_Div = new int[] { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22 };
                     var Hour_Speed_Dist = new List<double?>();
 
-                    //不同小时区间平均车速
+                    //不同小时区间平均车速（大樟桥暂不需要该数据，因为不存在上下班高峰期）
                     for (int i = 0; i < Hour_Div.Length; i++)
                     {
                         t1 = Hour_Div[i];
@@ -355,13 +389,14 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
 
-                    //周一至周日车辆数分布
-                    var Week_Div = new int[] { 12, 13, 14, 15, 9, 10, 11 };
+                    //周一至周日车辆数分布（大樟桥暂不需要该数据）
+                    //var Week_Div = new int[] { 12, 13, 14, 15, 9, 10, 11 };
+                    var Week_Div = new int[] { 4, 5, 6, 0, 1, 2, 3 };
                     var Week_Dist = new List<int>();
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
-                        Week_Dist.Add(table.Where(x => x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
+                        Week_Dist.Add(table.Where(x => x.HSData_DT.Value.Day%7 == t1).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try
