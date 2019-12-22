@@ -31,5 +31,16 @@ namespace HelinConsoleApp
         public virtual DbSet<HS_Data_201909> HS_Data_201909 { get; set; }
         public virtual DbSet<HS_Data_201910> HS_Data_201910 { get; set; }
         public virtual DbSet<HS_Data_201911> HS_Data_201911 { get; set; }
+        public virtual DbSet<HS_Data_201912> HS_Data_201912 { get; set; }
+        public virtual DbSet<HS_Data_202001> HS_Data_202001 { get; set; }
+        public virtual DbSet<HS_Data_202002> HS_Data_202002 { get; set; }
+        public virtual DbSet<HS_Data_202003> HS_Data_202003 { get; set; }
+        public virtual DbSet<HS_Data_202004> HS_Data_202004 { get; set; }
+        public virtual DbSet<HS_Data_202005> HS_Data_202005 { get; set; }
+        public virtual DbSet<HS_Data_202006> HS_Data_202006 { get; set; }
+        public virtual DbSet<HS_Data_202007> HS_Data_202007 { get; set; }
+        public virtual DbSet<HS_Data_202008> HS_Data_202008 { get; set; }
+        public virtual DbSet<HS_Data_202009> HS_Data_202009 { get; set; }
+        public virtual DbSet<HS_Data_202010> HS_Data_202010 { get; set; }
     }
 }
