@@ -356,12 +356,16 @@ namespace HelinConsoleApp
                     }
 
                     //周一至周日车辆数分布
-                    var Week_Div = new int[] { 12, 13, 14, 15, 9, 10, 11 };
+                    var Week_Div = new int[] { 4, 5, 6, 0, 1, 2, 3 };    //上一个月份
+                    var Week_Div2 = new int[] { 2, 3, 4, 5, 6, 0, 1 };    //这个月份
                     var Week_Dist = new List<int>();
+                    
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
-                        Week_Dist.Add(table.Where(x => x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
+                        t2 = Week_Div2[i];    
+                        Week_Dist.Add(table.Where(x => (x.HSData_DT.Value.Day % 7 == t1 && x.HSData_DT.Value.Month==11) 
+                        || (x.HSData_DT.Value.Day % 7 == t2 && x.HSData_DT.Value.Month == 12)).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try
