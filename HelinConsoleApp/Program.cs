@@ -71,7 +71,7 @@ namespace HelinConsoleApp
             var Gross_Load_Dist2 = new List<int>();
 
             var StartDataTime = new DateTime(2019, 11, 15, 0, 0, 0);
-            var FinishDataTime = new DateTime(2019, 11, 30, 23, 59, 59);
+            var FinishDataTime = new DateTime(2019, 12, 15, 23, 59, 59);
 
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
@@ -286,7 +286,7 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
 
-                    //不同车道分布（大樟桥咱不需要，因为明显其中1个车道重车多，另1个车道重车少）
+                    //不同车道分布（大樟桥暂不需要，因为明显其中1个车道重车多，另1个车道重车少）
                     var Lane_Div = new int[] { 1, 2 };
                     var Lane_Dist = new List<int>();
                     for (int i = 0; i < Lane_Div.Length; i++)
