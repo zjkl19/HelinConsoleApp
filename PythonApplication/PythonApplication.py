@@ -8,8 +8,7 @@ Created on Mon Apr 22 20:16:38 2019
 """
 import numpy as np
 
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+
 
 
 #定义函数来显示柱状上的数值
@@ -70,8 +69,8 @@ def autolabel(plt,rects,y_data):
         plt.text(rect.get_x()+rect.get_width()/2.+space*factor, 1.03*height, '%s' % height,fontsize=15)
         i=i+1
 
-def plotItem(itemChosen):
-
+def plotItem(plt,itemChosen):
+    fig=plt.figure
     #车重
     #车道
     #车速
@@ -249,8 +248,17 @@ def plotItem(itemChosen):
     #plt.show()
     plt.savefig(saveFileNameList[itemChosen])
 
-plotItem(1)
+#plotItem(plt,1)
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
-#for i in range(0,6):        # 第二个实例
-#   plotItem(i)
+
+
+#出现其他个数暂时用系统默认
+
+for i in range(0,6):        # 第二个实例
+
+    plotItem(plt,i)
+    plt.close()
+    
 
