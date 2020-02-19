@@ -7,7 +7,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace HelinConsoleApp
 {
     public class MyHS_Data
@@ -172,6 +171,8 @@ namespace HelinConsoleApp
 
                     var table = HS_DataForAnalysis;
 
+                    List<MyHS_Data> data = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).Take(10).ToList();
+                    var temp = ExportToExcelHelper.ExportTopGrossLoad(data);
                     var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).FirstOrDefault();
                     var g1 = maxGross_Load_Vehicle.Gross_Load;
                     var c1 = maxGross_Load_Vehicle.Axle_Num;
