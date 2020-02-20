@@ -55,6 +55,18 @@ namespace HelinConsoleApp
         public Nullable<int> Temp { get; set; }
         public Nullable<int> SiteID { get; set; }
     }
+    /// <summary>
+    /// 每日交通流量，对应“车流量统计表”
+    /// </summary>
+    public class DailyTraffic
+    {
+        public string Date { get; set; }
+        public int UpStreamCount { get; set; }
+
+        public int DownStreamCount { get; set; }
+
+        public int TotalStreamCount { get; set; }
+    }
 
     class Program
     {
@@ -171,8 +183,15 @@ namespace HelinConsoleApp
 
                     var table = HS_DataForAnalysis;
 
-                    List<MyHS_Data> data = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).Take(10).ToList();
+                    IEnumerable<DailyTraffic> dailyTrafficData = DataProcessing.GetDailyTraffic(table, StartDataTime, FinishDataTime);
+                    //var cc = table.Where(x => EntityFunctions.TruncateTime(x.HSData_DT)>= EntityFunctions.TruncateTime(StartDataTime)).Count();
+                   
+                    var temp1 = ExportToExcelHelper.ExportDailyTrafficVolume(dailyTrafficData.ToList());
+                    //重量前10的车辆数据导入excel
+                    List <MyHS_Data> data = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).Take(10).ToList();
                     var temp = ExportToExcelHelper.ExportTopGrossLoad(data);
+                    
+                    
                     var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).FirstOrDefault();
                     var g1 = maxGross_Load_Vehicle.Gross_Load;
                     var c1 = maxGross_Load_Vehicle.Axle_Num;
