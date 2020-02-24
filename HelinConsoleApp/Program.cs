@@ -80,9 +80,9 @@ namespace HelinConsoleApp
             var Gross_Load_Div = new int[] { 0, 10_000, 20_000, 30_000 };
             var Gross_Load_Dist = new List<int>();
 
-            var StartDataTime = new DateTime(2019, 12, 21, 0, 0, 0);
-            var FinishDataTime = new DateTime(2020, 1, 21, 0, 0, 0);
-
+            var StartDataTime = new DateTime(2020, 1, 21, 0, 0, 0);
+            var FinishDataTime = new DateTime(2020, 2, 21, 0, 0, 0);
+            int FirstMonth = StartDataTime.Month;int NextMonth = FinishDataTime.Month;
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
@@ -92,7 +92,7 @@ namespace HelinConsoleApp
                 {
                     #region HS_DataForAnalysis
                     var HS_DataForAnalysis = (
-                        from c in db.HS_Data_201912
+                        from c in db.HS_Data_202001
                         select new MyHS_Data
                         {
                             Acceleration = c.Acceleration,
@@ -135,7 +135,7 @@ namespace HelinConsoleApp
                             Gross_Load = c.Gross_Load
                         }
                         ).Union(
-                        from e in db.HS_Data_202001
+                        from e in db.HS_Data_202002
                         select new MyHS_Data
                         {
                             Acceleration = e.Acceleration,
@@ -185,8 +185,10 @@ namespace HelinConsoleApp
 
                     IEnumerable<DailyTraffic> dailyTrafficData = DataProcessing.GetDailyTraffic(table, StartDataTime, FinishDataTime);
                     //var cc = table.Where(x => EntityFunctions.TruncateTime(x.HSData_DT)>= EntityFunctions.TruncateTime(StartDataTime)).Count();
-                   
+
+                    //每日交通流量信息数据导入excel
                     var temp1 = ExportToExcelHelper.ExportDailyTrafficVolume(dailyTrafficData.ToList());
+                    
                     //重量前10的车辆数据导入excel
                     List <MyHS_Data> data = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).Take(10).ToList();
                     var temp = ExportToExcelHelper.ExportTopGrossLoad(data);
@@ -376,16 +378,16 @@ namespace HelinConsoleApp
                     }
 
                     //周一至周日车辆数分布
-                    var Week_Div = new int[] { 2, 3, 4, 5, 6, 0, 1 };    //上一个月份
-                    var Week_Div2 = new int[] { 6, 0, 1, 2, 3, 4, 5 };    //这个月份
+                    var Week_Div = new int[] { 6, 0, 1, 2, 3, 4, 5 };    //上一个月份余数
+                    var Week_Div2 = new int[] { 3, 4, 5, 6, 0, 1, 2};    //这个月份余数
                     var Week_Dist = new List<int>();
 
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
                         t2 = Week_Div2[i];
-                        Week_Dist.Add(table.Where(x => (x.HSData_DT.Value.Day % 7 == t1 && x.HSData_DT.Value.Month == 12)
-                        || (x.HSData_DT.Value.Day % 7 == t2 && x.HSData_DT.Value.Month == 1)).Where(dataPredicate).Count());
+                        Week_Dist.Add(table.Where(x => (x.HSData_DT.Value.Day % 7 == t1 && x.HSData_DT.Value.Month == FirstMonth)
+                        || (x.HSData_DT.Value.Day % 7 == t2 && x.HSData_DT.Value.Month == NextMonth)).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try
