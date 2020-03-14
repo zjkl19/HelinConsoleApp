@@ -81,8 +81,8 @@ namespace HelinConsoleApp
             var Gross_Load_Dist = new List<int>();
             var Gross_Load_Dist2 = new List<int>();
 
-            var StartDataTime = new DateTime(2019, 10, 21, 0, 0, 0);
-            var FinishDataTime = new DateTime(2019, 11, 21, 0, 0, 0);
+            var StartDataTime = new DateTime(2020, 1, 1, 0, 0, 0);
+            var FinishDataTime = new DateTime(2020, 2, 1, 0, 0, 0);
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
@@ -413,7 +413,7 @@ namespace HelinConsoleApp
                     //周一至周日车辆数分布
                     var Week_Div = new int[] { 6, 0, 1, 2, 3, 4, 5 };    //上一个月份余数
                     var Week_Div2 = new int[] { 3, 4, 5, 6, 0, 1, 2};    //这个月份余数
-                    
+                    var Week_Dist = new List<int>();
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
