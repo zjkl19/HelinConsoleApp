@@ -7,7 +7,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace HelinConsoleApp
 {
     public class MyHS_Data
@@ -56,6 +55,18 @@ namespace HelinConsoleApp
         public Nullable<int> Temp { get; set; }
         public Nullable<int> SiteID { get; set; }
     }
+    /// <summary>
+    /// 每日交通流量，对应“车流量统计表”
+    /// </summary>
+    public class DailyTraffic
+    {
+        public string Date { get; set; }
+        public int UpStreamCount { get; set; }
+
+        public int DownStreamCount { get; set; }
+
+        public int TotalStreamCount { get; set; }
+    }
 
     class Program
     {
@@ -70,9 +81,8 @@ namespace HelinConsoleApp
             var Gross_Load_Dist = new List<int>();
             var Gross_Load_Dist2 = new List<int>();
 
-            var StartDataTime = new DateTime(2019, 11, 15, 0, 0, 0);
-            var FinishDataTime = new DateTime(2019, 12, 15, 23, 59, 59);
-
+            var StartDataTime = new DateTime(2019, 10, 21, 0, 0, 0);
+            var FinishDataTime = new DateTime(2019, 11, 21, 0, 0, 0);
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
@@ -82,7 +92,7 @@ namespace HelinConsoleApp
                 {
                     #region HS_DataForAnalysis
                     var HS_DataForAnalysis = (
-                        from c in db.HS_Data_201911
+                        from c in db.HS_Data_202001
                         select new MyHS_Data
                         {
                             Acceleration = c.Acceleration,
@@ -125,7 +135,7 @@ namespace HelinConsoleApp
                             Gross_Load = c.Gross_Load
                         }
                         ).Union(
-                        from e in db.HS_Data_201912
+                        from e in db.HS_Data_202002
                         select new MyHS_Data
                         {
                             Acceleration = e.Acceleration,
@@ -173,6 +183,17 @@ namespace HelinConsoleApp
 
                     var table = HS_DataForAnalysis;
 
+                    IEnumerable<DailyTraffic> dailyTrafficData = DataProcessing.GetDailyTraffic(table, StartDataTime, FinishDataTime);
+                    //var cc = table.Where(x => EntityFunctions.TruncateTime(x.HSData_DT)>= EntityFunctions.TruncateTime(StartDataTime)).Count();
+
+                    //每日交通流量信息数据导入excel
+                    var temp1 = ExportToExcelHelper.ExportDailyTrafficVolume(dailyTrafficData.ToList());
+                    
+                    //重量前10的车辆数据导入excel
+                    List <MyHS_Data> data = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).Take(10).ToList();
+                    var temp = ExportToExcelHelper.ExportTopGrossLoad(data);
+                    
+                    
                     var maxGross_Load_Vehicle = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).FirstOrDefault();
                     var g1 = maxGross_Load_Vehicle.Gross_Load;
                     var c1 = maxGross_Load_Vehicle.Axle_Num;
@@ -389,14 +410,14 @@ namespace HelinConsoleApp
                         Console.WriteLine(ex.Message);
                     }
 
-                    //周一至周日车辆数分布（大樟桥暂不需要该数据）
-                    //var Week_Div = new int[] { 12, 13, 14, 15, 9, 10, 11 };
-                    var Week_Div = new int[] { 4, 5, 6, 0, 1, 2, 3 };
-                    var Week_Dist = new List<int>();
+                    //周一至周日车辆数分布
+                    var Week_Div = new int[] { 6, 0, 1, 2, 3, 4, 5 };    //上一个月份余数
+                    var Week_Div2 = new int[] { 3, 4, 5, 6, 0, 1, 2};    //这个月份余数
+                    
                     for (int i = 0; i < Week_Div.Length; i++)
                     {
                         t1 = Week_Div[i];
-                        Week_Dist.Add(table.Where(x => x.HSData_DT.Value.Day%7 == t1).Where(dataPredicate).Count());
+                        Week_Dist.Add(table.Where(x => x.HSData_DT.Value.Day == t1).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try
@@ -428,7 +449,7 @@ namespace HelinConsoleApp
                         {
                             t2 = Hour_Div[i + 1];
                             //TODO:Convert.ToDateTime(x.HSData_DT)中x.HSData_DT为空时会抛出异常
-                            Hour_Weight.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2).Where(dataPredicate).Where(x=>x.Gross_Load>40000).Count());
+                            Hour_Weight.Add(table.Where(x => x.HSData_DT.Value.Hour >= t1 && x.HSData_DT.Value.Hour < t2).Where(dataPredicate).Where(x => x.Gross_Load > 40000).Count());
                         }
                         else
                         {
