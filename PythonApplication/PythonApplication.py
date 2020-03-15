@@ -71,41 +71,27 @@ def autolabel(plt,rects,y_data):
 
 def plotItem(plt,itemChosen):
     fig=plt.figure
-    #车重
-    #车道
-    #车速
-    #周一至周日
-    #不同小时区间车辆总数
-    #不同小时区间平均车速
 
     fontSize=15
 
     totalDays=7    #总天数
 
     saveFileNameList=[
-    '不同车重区间车辆数',
-    '不同车道车辆数',
-    '不同车速区间车辆数',
-    '周一至周日车辆数',
-    '不同小时区间车辆数',
-    '不同小时区间平均车速'
+    '车道1不同重量车辆数及比例',
+    '车道2不同重量车辆数及比例',
+    '不同时间段车辆总数',
+    '不同速度车辆数及比例'
     ]
 
-    #车重
-    #车道
-    #车速
-    #周一至周日
-    #不同小时车辆总数
-    #不同小时平均车速
-    #不同时间>40t车辆数
+    #车道1不同重量车辆数及比例
+    #车道2不同重量车辆数及比例
+    #不同时间段车辆总数
+    #不同速度车辆数及比例
     y_dataList=[
-    [896512,6057,72,12],
-    [190721,262277,244212,205443],
-    [15851,163733,665984,57085],
-    [102338,161864,186335,164279,106144,91623,90070],
-    [14320,6009,6976,59927,125594,109338,103290,128203,142634,104783,63927,37652],
-    [60.5,60.9,58.8,57.3,56.0,55.8,57.4,55.2,54.2,54.3,55.7,58.3],
-    [5,6,6,0,1,1,1,5,3,2,6,11]
+    [22267,5104,575,178],
+    [22407,2048,1259,4537],
+    [1441,978,1035,4075,7409,7965,7589,8830,8494,5138,3266,2155],
+    [356,14047,35837,8135]
     ]
 
     ## 包含每个柱子对应值的序列
@@ -138,20 +124,15 @@ def plotItem(plt,itemChosen):
     plt.xticks(fontsize=fontSize)
     plt.yticks(fontsize=fontSize)
 
-    #车重
-    #车道
-    #车速
-    #周一至周日
-    #不同小时车辆总数
-    #不同小时平均车速
+    #车道1不同重量车辆数及比例
+    #车道2不同重量车辆数及比例
+    #不同时间段车辆总数
+    #不同速度车辆数及比例
     xticksPrefixList=[
-    ['0～10t','10～20t','20～30t','30t以上'],
-    ['车道1','车道2','车道3','车道4'],
-    ['0～30km/h','30～50km/h','50～70km/h','70km/h以上'],
-    ['周一','周二','周三','周四','周五','周六','周日'],
+    ['0～10t','10～30t','30～50t','50t以上'],
+    ['0～10t','10～30t','30～50t','50t以上'],
     ['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24'],
-    ['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24'],
-    ['0～2','2～4','4～6','6～8','8～10','10～12','12～14','14～16','16～18','18～20','20～22','22～24']
+    ['0～2km/h','20～40km/h','40～60km/h','60km/h以上']
     ]
 
     xticksPrefix=xticksPrefixList[itemChosen]
@@ -188,7 +169,7 @@ def plotItem(plt,itemChosen):
     #plt.xlabel("年份")
 
     #TODO:重构变量初始化
-    ylabelList=['数量','数量','数量','数量','数量','车速（km/h）']
+    ylabelList=['数量','数量','数量','车速（km/h）']
     #ylabelList.append('数量')
     #ylabelList.append('数量')
     #ylabelList.append('数量')
@@ -223,11 +204,8 @@ def plotItem(plt,itemChosen):
 
     xticksLabelList.append(xticksLabel1)
     xticksLabelList.append(xticksLabel1)
+    xticksLabelList.append(xticksLabel2)
     xticksLabelList.append(xticksLabel1)
-    xticksLabelList.append(xticksLabel2)
-    xticksLabelList.append(xticksLabel2)
-    xticksLabelList.append(xticksLabel2)
-    xticksLabelList.append(xticksLabel2)
 
     xticksLabel=xticksLabelList[itemChosen]
 
@@ -256,7 +234,8 @@ import matplotlib.ticker as ticker
 
 #出现其他个数暂时用系统默认
 
-for i in range(0,6):        # 第二个实例
+for i in range(0,4
+):        # 第二个实例
 
     plotItem(plt,i)
     plt.close()
