@@ -75,15 +75,16 @@ namespace HelinConsoleApp
             //add 5
             //ldn c8
 
-            int t1, t2;
+            int t1, t2, t3, t4, t5, t6, t7, t8;
+            int m1, m2, m3, m4, m5, m6, m7, m8;
 
             var Gross_Load_Div = new int[] { 0, 10_000, 20_000, 30_000 };
             var Gross_Load_Dist = new List<int>();
 
-            var StartDataTime = new DateTime(2020, 1, 21, 0, 0, 0);
-            var FinishDataTime = new DateTime(2020, 2, 21, 0, 0, 0);
-            int FirstMonth = StartDataTime.Month;int NextMonth = FinishDataTime.Month;
-
+            var StartDataTime = new DateTime(2019, 8, 13, 0, 0, 0);
+            var FinishDataTime = new DateTime(2020, 3, 14, 0, 0, 0);
+            var MonthArray = new int[] { 8, 9, 10, 11, 12, 1, 2, 3 };
+            int FirstMonth = StartDataTime.Month; int NextMonth = FinishDataTime.Month;
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
             try
@@ -92,6 +93,221 @@ namespace HelinConsoleApp
                 {
                     #region HS_DataForAnalysis
                     var HS_DataForAnalysis = (
+                        from c in db.HS_Data_201908
+                        select new MyHS_Data
+                        {
+                            Acceleration = c.Acceleration,
+                            AxleGrp_Num = c.AxleGrp_Num,
+                            Axle_Num = c.Axle_Num,
+                            ExternInfo = c.ExternInfo,
+                            F7Code = c.F7Code,
+                            HSData_Id = c.HSData_Id,
+                            Veh_Length = c.Veh_Length,
+                            Veh_Type = c.Veh_Type,
+                            LWheel_1_W = c.LWheel_1_W,
+                            LWheel_2_W = c.LWheel_2_W,
+                            LWheel_3_W = c.LWheel_3_W,
+                            LWheel_4_W = c.LWheel_4_W,
+                            LWheel_5_W = c.LWheel_5_W,
+                            LWheel_6_W = c.LWheel_6_W,
+                            LWheel_7_W = c.LWheel_7_W,
+                            LWheel_8_W = c.LWheel_8_W,
+                            Lane_Id = c.Lane_Id,
+                            Oper_Direc = c.Oper_Direc,
+                            Speed = c.Speed,
+                            OverLoad_Sign = c.OverLoad_Sign,
+                            RWheel_1_W = c.RWheel_1_W,
+                            RWheel_2_W = c.RWheel_2_W,
+                            RWheel_3_W = c.RWheel_3_W,
+                            RWheel_4_W = c.RWheel_4_W,
+                            RWheel_5_W = c.RWheel_5_W,
+                            RWheel_6_W = c.RWheel_6_W,
+                            RWheel_7_W = c.RWheel_7_W,
+                            RWheel_8_W = c.RWheel_8_W,
+                            Violation_Id = c.Violation_Id,
+                            AxleDis1 = c.AxleDis1,
+                            AxleDis2 = c.AxleDis2,
+                            AxleDis3 = c.AxleDis3,
+                            AxleDis4 = c.AxleDis4,
+                            AxleDis5 = c.AxleDis5,
+                            AxleDis6 = c.AxleDis6,
+                            AxleDis7 = c.AxleDis7,
+                            HSData_DT = c.HSData_DT,
+                            Gross_Load = c.Gross_Load
+                        }
+                        ).Union(
+                        from c in db.HS_Data_201909
+                        select new MyHS_Data
+                        {
+                            Acceleration = c.Acceleration,
+                            AxleGrp_Num = c.AxleGrp_Num,
+                            Axle_Num = c.Axle_Num,
+                            ExternInfo = c.ExternInfo,
+                            F7Code = c.F7Code,
+                            HSData_Id = c.HSData_Id,
+                            Veh_Length = c.Veh_Length,
+                            Veh_Type = c.Veh_Type,
+                            LWheel_1_W = c.LWheel_1_W,
+                            LWheel_2_W = c.LWheel_2_W,
+                            LWheel_3_W = c.LWheel_3_W,
+                            LWheel_4_W = c.LWheel_4_W,
+                            LWheel_5_W = c.LWheel_5_W,
+                            LWheel_6_W = c.LWheel_6_W,
+                            LWheel_7_W = c.LWheel_7_W,
+                            LWheel_8_W = c.LWheel_8_W,
+                            Lane_Id = c.Lane_Id,
+                            Oper_Direc = c.Oper_Direc,
+                            Speed = c.Speed,
+                            OverLoad_Sign = c.OverLoad_Sign,
+                            RWheel_1_W = c.RWheel_1_W,
+                            RWheel_2_W = c.RWheel_2_W,
+                            RWheel_3_W = c.RWheel_3_W,
+                            RWheel_4_W = c.RWheel_4_W,
+                            RWheel_5_W = c.RWheel_5_W,
+                            RWheel_6_W = c.RWheel_6_W,
+                            RWheel_7_W = c.RWheel_7_W,
+                            RWheel_8_W = c.RWheel_8_W,
+                            Violation_Id = c.Violation_Id,
+                            AxleDis1 = c.AxleDis1,
+                            AxleDis2 = c.AxleDis2,
+                            AxleDis3 = c.AxleDis3,
+                            AxleDis4 = c.AxleDis4,
+                            AxleDis5 = c.AxleDis5,
+                            AxleDis6 = c.AxleDis6,
+                            AxleDis7 = c.AxleDis7,
+                            HSData_DT = c.HSData_DT,
+                            Gross_Load = c.Gross_Load
+                        }
+                        ).Union(
+                        from c in db.HS_Data_201910
+                        select new MyHS_Data
+                        {
+                            Acceleration = c.Acceleration,
+                            AxleGrp_Num = c.AxleGrp_Num,
+                            Axle_Num = c.Axle_Num,
+                            ExternInfo = c.ExternInfo,
+                            F7Code = c.F7Code,
+                            HSData_Id = c.HSData_Id,
+                            Veh_Length = c.Veh_Length,
+                            Veh_Type = c.Veh_Type,
+                            LWheel_1_W = c.LWheel_1_W,
+                            LWheel_2_W = c.LWheel_2_W,
+                            LWheel_3_W = c.LWheel_3_W,
+                            LWheel_4_W = c.LWheel_4_W,
+                            LWheel_5_W = c.LWheel_5_W,
+                            LWheel_6_W = c.LWheel_6_W,
+                            LWheel_7_W = c.LWheel_7_W,
+                            LWheel_8_W = c.LWheel_8_W,
+                            Lane_Id = c.Lane_Id,
+                            Oper_Direc = c.Oper_Direc,
+                            Speed = c.Speed,
+                            OverLoad_Sign = c.OverLoad_Sign,
+                            RWheel_1_W = c.RWheel_1_W,
+                            RWheel_2_W = c.RWheel_2_W,
+                            RWheel_3_W = c.RWheel_3_W,
+                            RWheel_4_W = c.RWheel_4_W,
+                            RWheel_5_W = c.RWheel_5_W,
+                            RWheel_6_W = c.RWheel_6_W,
+                            RWheel_7_W = c.RWheel_7_W,
+                            RWheel_8_W = c.RWheel_8_W,
+                            Violation_Id = c.Violation_Id,
+                            AxleDis1 = c.AxleDis1,
+                            AxleDis2 = c.AxleDis2,
+                            AxleDis3 = c.AxleDis3,
+                            AxleDis4 = c.AxleDis4,
+                            AxleDis5 = c.AxleDis5,
+                            AxleDis6 = c.AxleDis6,
+                            AxleDis7 = c.AxleDis7,
+                            HSData_DT = c.HSData_DT,
+                            Gross_Load = c.Gross_Load
+                        }
+                        ).Union(
+                        from c in db.HS_Data_201911
+                        select new MyHS_Data
+                        {
+                            Acceleration = c.Acceleration,
+                            AxleGrp_Num = c.AxleGrp_Num,
+                            Axle_Num = c.Axle_Num,
+                            ExternInfo = c.ExternInfo,
+                            F7Code = c.F7Code,
+                            HSData_Id = c.HSData_Id,
+                            Veh_Length = c.Veh_Length,
+                            Veh_Type = c.Veh_Type,
+                            LWheel_1_W = c.LWheel_1_W,
+                            LWheel_2_W = c.LWheel_2_W,
+                            LWheel_3_W = c.LWheel_3_W,
+                            LWheel_4_W = c.LWheel_4_W,
+                            LWheel_5_W = c.LWheel_5_W,
+                            LWheel_6_W = c.LWheel_6_W,
+                            LWheel_7_W = c.LWheel_7_W,
+                            LWheel_8_W = c.LWheel_8_W,
+                            Lane_Id = c.Lane_Id,
+                            Oper_Direc = c.Oper_Direc,
+                            Speed = c.Speed,
+                            OverLoad_Sign = c.OverLoad_Sign,
+                            RWheel_1_W = c.RWheel_1_W,
+                            RWheel_2_W = c.RWheel_2_W,
+                            RWheel_3_W = c.RWheel_3_W,
+                            RWheel_4_W = c.RWheel_4_W,
+                            RWheel_5_W = c.RWheel_5_W,
+                            RWheel_6_W = c.RWheel_6_W,
+                            RWheel_7_W = c.RWheel_7_W,
+                            RWheel_8_W = c.RWheel_8_W,
+                            Violation_Id = c.Violation_Id,
+                            AxleDis1 = c.AxleDis1,
+                            AxleDis2 = c.AxleDis2,
+                            AxleDis3 = c.AxleDis3,
+                            AxleDis4 = c.AxleDis4,
+                            AxleDis5 = c.AxleDis5,
+                            AxleDis6 = c.AxleDis6,
+                            AxleDis7 = c.AxleDis7,
+                            HSData_DT = c.HSData_DT,
+                            Gross_Load = c.Gross_Load
+                        }
+                        ).Union(
+                        from c in db.HS_Data_201912
+                        select new MyHS_Data
+                        {
+                            Acceleration = c.Acceleration,
+                            AxleGrp_Num = c.AxleGrp_Num,
+                            Axle_Num = c.Axle_Num,
+                            ExternInfo = c.ExternInfo,
+                            F7Code = c.F7Code,
+                            HSData_Id = c.HSData_Id,
+                            Veh_Length = c.Veh_Length,
+                            Veh_Type = c.Veh_Type,
+                            LWheel_1_W = c.LWheel_1_W,
+                            LWheel_2_W = c.LWheel_2_W,
+                            LWheel_3_W = c.LWheel_3_W,
+                            LWheel_4_W = c.LWheel_4_W,
+                            LWheel_5_W = c.LWheel_5_W,
+                            LWheel_6_W = c.LWheel_6_W,
+                            LWheel_7_W = c.LWheel_7_W,
+                            LWheel_8_W = c.LWheel_8_W,
+                            Lane_Id = c.Lane_Id,
+                            Oper_Direc = c.Oper_Direc,
+                            Speed = c.Speed,
+                            OverLoad_Sign = c.OverLoad_Sign,
+                            RWheel_1_W = c.RWheel_1_W,
+                            RWheel_2_W = c.RWheel_2_W,
+                            RWheel_3_W = c.RWheel_3_W,
+                            RWheel_4_W = c.RWheel_4_W,
+                            RWheel_5_W = c.RWheel_5_W,
+                            RWheel_6_W = c.RWheel_6_W,
+                            RWheel_7_W = c.RWheel_7_W,
+                            RWheel_8_W = c.RWheel_8_W,
+                            Violation_Id = c.Violation_Id,
+                            AxleDis1 = c.AxleDis1,
+                            AxleDis2 = c.AxleDis2,
+                            AxleDis3 = c.AxleDis3,
+                            AxleDis4 = c.AxleDis4,
+                            AxleDis5 = c.AxleDis5,
+                            AxleDis6 = c.AxleDis6,
+                            AxleDis7 = c.AxleDis7,
+                            HSData_DT = c.HSData_DT,
+                            Gross_Load = c.Gross_Load
+                        }
+                        ).Union(
                         from c in db.HS_Data_202001
                         select new MyHS_Data
                         {
@@ -136,6 +352,49 @@ namespace HelinConsoleApp
                         }
                         ).Union(
                         from e in db.HS_Data_202002
+                        select new MyHS_Data
+                        {
+                            Acceleration = e.Acceleration,
+                            AxleGrp_Num = e.AxleGrp_Num,
+                            Axle_Num = e.Axle_Num,
+                            ExternInfo = e.ExternInfo,
+                            F7Code = e.F7Code,
+                            HSData_Id = e.HSData_Id,
+                            Veh_Length = e.Veh_Length,
+                            Veh_Type = e.Veh_Type,
+                            LWheel_1_W = e.LWheel_1_W,
+                            LWheel_2_W = e.LWheel_2_W,
+                            LWheel_3_W = e.LWheel_3_W,
+                            LWheel_4_W = e.LWheel_4_W,
+                            LWheel_5_W = e.LWheel_5_W,
+                            LWheel_6_W = e.LWheel_6_W,
+                            LWheel_7_W = e.LWheel_7_W,
+                            LWheel_8_W = e.LWheel_8_W,
+                            Lane_Id = e.Lane_Id,
+                            Oper_Direc = e.Oper_Direc,
+                            Speed = e.Speed,
+                            OverLoad_Sign = e.OverLoad_Sign,
+                            RWheel_1_W = e.RWheel_1_W,
+                            RWheel_2_W = e.RWheel_2_W,
+                            RWheel_3_W = e.RWheel_3_W,
+                            RWheel_4_W = e.RWheel_4_W,
+                            RWheel_5_W = e.RWheel_5_W,
+                            RWheel_6_W = e.RWheel_6_W,
+                            RWheel_7_W = e.RWheel_7_W,
+                            RWheel_8_W = e.RWheel_8_W,
+                            Violation_Id = e.Violation_Id,
+                            AxleDis1 = e.AxleDis1,
+                            AxleDis2 = e.AxleDis2,
+                            AxleDis3 = e.AxleDis3,
+                            AxleDis4 = e.AxleDis4,
+                            AxleDis5 = e.AxleDis5,
+                            AxleDis6 = e.AxleDis6,
+                            AxleDis7 = e.AxleDis7,
+                            HSData_DT = e.HSData_DT,
+                            Gross_Load = e.Gross_Load
+                        }
+                        ).Union(
+                        from e in db.HS_Data_202003
                         select new MyHS_Data
                         {
                             Acceleration = e.Acceleration,
@@ -378,16 +637,30 @@ namespace HelinConsoleApp
                     }
 
                     //周一至周日车辆数分布
-                    var Week_Div = new int[] { 6, 0, 1, 2, 3, 4, 5 };    //上一个月份余数
-                    var Week_Div2 = new int[] { 3, 4, 5, 6, 0, 1, 2};    //这个月份余数
-                    var Week_Dist = new List<int>();
+                    var Week_Div = new int[,] {
+                         { 5, 6, 0, 1, 2, 3, 4 }
+                        , { 2, 3, 4, 5, 6, 0, 1 }
+                        , { 0, 1, 2, 3, 4, 5, 6 }
+                        , { 4, 5, 6, 0, 1, 2, 3 }
+                        , { 2, 3, 4, 5, 6, 0, 1 }
+                        , { 6, 0, 1, 2, 3, 4, 5 }
+                        , { 3, 4, 5, 6, 0, 1, 2 }
+                        , { 2, 3, 4, 5, 6, 0, 1 }
+                    };
 
-                    for (int i = 0; i < Week_Div.Length; i++)
+                    //var Week_Div = new int[] { 6, 0, 1, 2, 3, 4, 5 };    //上一个月份余数
+                    //var Week_Div2 = new int[] { 3, 4, 5, 6, 0, 1, 2};    //这个月份余数
+                    var Week_Dist = new List<int>();
+                    m1 = MonthArray[0]; m2 = MonthArray[1]; m3 = MonthArray[2]; m4 = MonthArray[3];
+                    m5 = MonthArray[4]; m6 = MonthArray[5]; m7 = MonthArray[6]; m8 = MonthArray[7];
+                    for (int i = 0; i < Week_Div.GetLength(1); i++)    //参考https://www.cnblogs.com/xyrbk/p/6807956.html
                     {
-                        t1 = Week_Div[i];
-                        t2 = Week_Div2[i];
-                        Week_Dist.Add(table.Where(x => (x.HSData_DT.Value.Day % 7 == t1 && x.HSData_DT.Value.Month == FirstMonth)
-                        || (x.HSData_DT.Value.Day % 7 == t2 && x.HSData_DT.Value.Month == NextMonth)).Where(dataPredicate).Count());
+                        t1 = Week_Div[0, i]; t2 = Week_Div[1, i]; t3 = Week_Div[2, i]; t4 = Week_Div[3, i];
+                        t5 = Week_Div[4, i]; t6 = Week_Div[5, i]; t7 = Week_Div[6, i]; t8 = Week_Div[7, i];
+                        
+                        Week_Dist.Add(table.Where(x => (x.HSData_DT.Value.Day % 7 == t1 && x.HSData_DT.Value.Month == m1)
+                        || (x.HSData_DT.Value.Day % 7 == t2 && x.HSData_DT.Value.Month == m2)
+                        ).Where(dataPredicate).Count());
                         Console.WriteLine(Week_Dist[i]);
                     }
                     try
@@ -395,7 +668,7 @@ namespace HelinConsoleApp
                         var fs = new FileStream("周一至周日车辆数.txt", FileMode.Create);
                         var sw = new StreamWriter(fs, Encoding.Default);
                         var writeString = $"{Week_Dist[0]}";
-                        for (int i = 1; i < Week_Div.Length; i++)
+                        for (int i = 1; i < Week_Div.GetLength(1); i++)
                         {
                             writeString = $"{writeString},{Week_Dist[i]}";
                         }
