@@ -51,7 +51,6 @@
           <Property Name="F7Code" Type="nvarchar" MaxLength="56" />
           <Property Name="ExternInfo" Type="real" />
           <Property Name="Temp" Type="int" />
-          <Property Name="SiteID" Type="int" />
         </EntityType>
         <EntityType Name="HS_Data_201907">
           <Key>
@@ -816,6 +815,55 @@
           <Property Name="Temp" Type="int" />
           <Property Name="SiteID" Type="int" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“HighSpeed_JCB.dbo.LDN_HS_Data”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="LDN_HS_Data">
+          <Key>
+            <PropertyRef Name="HSData_Id" />
+          </Key>
+          <Property Name="HSData_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lane_Id" Type="tinyint" />
+          <Property Name="HSData_DT" Type="datetime" />
+          <Property Name="Oper_Direc" Type="varchar" MaxLength="10" />
+          <Property Name="Axle_Num" Type="tinyint" />
+          <Property Name="AxleGrp_Num" Type="tinyint" />
+          <Property Name="Gross_Load" Type="int" />
+          <Property Name="Veh_Type" Type="smallint" />
+          <Property Name="LWheel_1_W" Type="int" />
+          <Property Name="LWheel_2_W" Type="int" />
+          <Property Name="LWheel_3_W" Type="int" />
+          <Property Name="LWheel_4_W" Type="int" />
+          <Property Name="LWheel_5_W" Type="int" />
+          <Property Name="LWheel_6_W" Type="int" />
+          <Property Name="LWheel_7_W" Type="int" />
+          <Property Name="LWheel_8_W" Type="int" />
+          <Property Name="RWheel_1_W" Type="int" />
+          <Property Name="RWheel_2_W" Type="int" />
+          <Property Name="RWheel_3_W" Type="int" />
+          <Property Name="RWheel_4_W" Type="int" />
+          <Property Name="RWheel_5_W" Type="int" />
+          <Property Name="RWheel_6_W" Type="int" />
+          <Property Name="RWheel_7_W" Type="int" />
+          <Property Name="RWheel_8_W" Type="int" />
+          <Property Name="AxleDis1" Type="int" />
+          <Property Name="AxleDis2" Type="int" />
+          <Property Name="AxleDis3" Type="int" />
+          <Property Name="AxleDis4" Type="int" />
+          <Property Name="AxleDis5" Type="int" />
+          <Property Name="AxleDis6" Type="int" />
+          <Property Name="AxleDis7" Type="int" />
+          <Property Name="Violation_Id" Type="int" />
+          <Property Name="OverLoad_Sign" Type="tinyint" />
+          <Property Name="Speed" Type="int" />
+          <Property Name="Acceleration" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Veh_Length" Type="int" />
+          <Property Name="QAT" Type="numeric" Precision="14" Scale="4" />
+          <Property Name="License_Plate" Type="nvarchar" MaxLength="12" />
+          <Property Name="License_Plate_Color" Type="nvarchar" MaxLength="12" />
+          <Property Name="F7Code" Type="nvarchar" MaxLength="56" />
+          <Property Name="ExternInfo" Type="real" />
+          <Property Name="Temp" Type="int" />
+        </EntityType>
         <EntityContainer Name="HighSpeed_JCBModelStoreContainer">
           <EntitySet Name="HS_Data" EntityType="Self.HS_Data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_201907" EntityType="Self.HS_Data_201907" Schema="dbo" store:Type="Tables" />
@@ -834,6 +882,52 @@
           <EntitySet Name="HS_Data_202008" EntityType="Self.HS_Data_202008" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_202009" EntityType="Self.HS_Data_202009" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HS_Data_202010" EntityType="Self.HS_Data_202010" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LDN_HS_Data" EntityType="Self.LDN_HS_Data" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LDN_HS_Data].[HSData_Id] AS [HSData_Id], 
+    [LDN_HS_Data].[Lane_Id] AS [Lane_Id], 
+    [LDN_HS_Data].[HSData_DT] AS [HSData_DT], 
+    [LDN_HS_Data].[Oper_Direc] AS [Oper_Direc], 
+    [LDN_HS_Data].[Axle_Num] AS [Axle_Num], 
+    [LDN_HS_Data].[AxleGrp_Num] AS [AxleGrp_Num], 
+    [LDN_HS_Data].[Gross_Load] AS [Gross_Load], 
+    [LDN_HS_Data].[Veh_Type] AS [Veh_Type], 
+    [LDN_HS_Data].[LWheel_1_W] AS [LWheel_1_W], 
+    [LDN_HS_Data].[LWheel_2_W] AS [LWheel_2_W], 
+    [LDN_HS_Data].[LWheel_3_W] AS [LWheel_3_W], 
+    [LDN_HS_Data].[LWheel_4_W] AS [LWheel_4_W], 
+    [LDN_HS_Data].[LWheel_5_W] AS [LWheel_5_W], 
+    [LDN_HS_Data].[LWheel_6_W] AS [LWheel_6_W], 
+    [LDN_HS_Data].[LWheel_7_W] AS [LWheel_7_W], 
+    [LDN_HS_Data].[LWheel_8_W] AS [LWheel_8_W], 
+    [LDN_HS_Data].[RWheel_1_W] AS [RWheel_1_W], 
+    [LDN_HS_Data].[RWheel_2_W] AS [RWheel_2_W], 
+    [LDN_HS_Data].[RWheel_3_W] AS [RWheel_3_W], 
+    [LDN_HS_Data].[RWheel_4_W] AS [RWheel_4_W], 
+    [LDN_HS_Data].[RWheel_5_W] AS [RWheel_5_W], 
+    [LDN_HS_Data].[RWheel_6_W] AS [RWheel_6_W], 
+    [LDN_HS_Data].[RWheel_7_W] AS [RWheel_7_W], 
+    [LDN_HS_Data].[RWheel_8_W] AS [RWheel_8_W], 
+    [LDN_HS_Data].[AxleDis1] AS [AxleDis1], 
+    [LDN_HS_Data].[AxleDis2] AS [AxleDis2], 
+    [LDN_HS_Data].[AxleDis3] AS [AxleDis3], 
+    [LDN_HS_Data].[AxleDis4] AS [AxleDis4], 
+    [LDN_HS_Data].[AxleDis5] AS [AxleDis5], 
+    [LDN_HS_Data].[AxleDis6] AS [AxleDis6], 
+    [LDN_HS_Data].[AxleDis7] AS [AxleDis7], 
+    [LDN_HS_Data].[Violation_Id] AS [Violation_Id], 
+    [LDN_HS_Data].[OverLoad_Sign] AS [OverLoad_Sign], 
+    [LDN_HS_Data].[Speed] AS [Speed], 
+    [LDN_HS_Data].[Acceleration] AS [Acceleration], 
+    [LDN_HS_Data].[Veh_Length] AS [Veh_Length], 
+    [LDN_HS_Data].[QAT] AS [QAT], 
+    [LDN_HS_Data].[License_Plate] AS [License_Plate], 
+    [LDN_HS_Data].[License_Plate_Color] AS [License_Plate_Color], 
+    [LDN_HS_Data].[F7Code] AS [F7Code], 
+    [LDN_HS_Data].[ExternInfo] AS [ExternInfo], 
+    [LDN_HS_Data].[Temp] AS [Temp]
+    FROM [dbo].[LDN_HS_Data] AS [LDN_HS_Data]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -885,7 +979,6 @@
           <Property Name="F7Code" Type="String" MaxLength="56" FixedLength="false" Unicode="true" />
           <Property Name="ExternInfo" Type="Single" />
           <Property Name="Temp" Type="Int32" />
-          <Property Name="SiteID" Type="Int32" />
         </EntityType>
         <EntityType Name="HS_Data_201907">
           <Key>
@@ -1076,25 +1169,6 @@
           <Property Name="ExternInfo" Type="Single" />
           <Property Name="Temp" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="HighSpeed_JCBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="HS_Data" EntityType="Self.HS_Data" />
-          <EntitySet Name="HS_Data_201907" EntityType="Self.HS_Data_201907" />
-          <EntitySet Name="HS_Data_201908" EntityType="Self.HS_Data_201908" />
-          <EntitySet Name="HS_Data_201909" EntityType="Self.HS_Data_201909" />
-          <EntitySet Name="HS_Data_201910" EntityType="Self.HS_Data_201910" />
-          <EntitySet Name="HS_Data_201911" EntityType="HighSpeed_JCBModel.HS_Data_201911" />
-          <EntitySet Name="HS_Data_201912" EntityType="HighSpeed_JCBModel.HS_Data_201912" />
-          <EntitySet Name="HS_Data_202001" EntityType="HighSpeed_JCBModel.HS_Data_202001" />
-          <EntitySet Name="HS_Data_202002" EntityType="HighSpeed_JCBModel.HS_Data_202002" />
-          <EntitySet Name="HS_Data_202003" EntityType="HighSpeed_JCBModel.HS_Data_202003" />
-          <EntitySet Name="HS_Data_202004" EntityType="HighSpeed_JCBModel.HS_Data_202004" />
-          <EntitySet Name="HS_Data_202005" EntityType="HighSpeed_JCBModel.HS_Data_202005" />
-          <EntitySet Name="HS_Data_202006" EntityType="HighSpeed_JCBModel.HS_Data_202006" />
-          <EntitySet Name="HS_Data_202007" EntityType="HighSpeed_JCBModel.HS_Data_202007" />
-          <EntitySet Name="HS_Data_202008" EntityType="HighSpeed_JCBModel.HS_Data_202008" />
-          <EntitySet Name="HS_Data_202009" EntityType="HighSpeed_JCBModel.HS_Data_202009" />
-          <EntitySet Name="HS_Data_202010" EntityType="HighSpeed_JCBModel.HS_Data_202010" />
-        </EntityContainer>
         <EntityType Name="HS_Data_201911">
           <Key>
             <PropertyRef Name="HSData_Id" />
@@ -1668,6 +1742,73 @@
           <Property Name="ExternInfo" Type="Single" />
           <Property Name="Temp" Type="Int32" />
           <Property Name="SiteID" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="HighSpeed_JCBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HS_Data" EntityType="Self.HS_Data" />
+          <EntitySet Name="HS_Data_201907" EntityType="Self.HS_Data_201907" />
+          <EntitySet Name="HS_Data_201908" EntityType="Self.HS_Data_201908" />
+          <EntitySet Name="HS_Data_201909" EntityType="Self.HS_Data_201909" />
+          <EntitySet Name="HS_Data_201910" EntityType="Self.HS_Data_201910" />
+          <EntitySet Name="HS_Data_201911" EntityType="Self.HS_Data_201911" />
+          <EntitySet Name="HS_Data_201912" EntityType="Self.HS_Data_201912" />
+          <EntitySet Name="HS_Data_202001" EntityType="Self.HS_Data_202001" />
+          <EntitySet Name="HS_Data_202002" EntityType="Self.HS_Data_202002" />
+          <EntitySet Name="HS_Data_202003" EntityType="Self.HS_Data_202003" />
+          <EntitySet Name="HS_Data_202004" EntityType="Self.HS_Data_202004" />
+          <EntitySet Name="HS_Data_202005" EntityType="Self.HS_Data_202005" />
+          <EntitySet Name="HS_Data_202006" EntityType="Self.HS_Data_202006" />
+          <EntitySet Name="HS_Data_202007" EntityType="Self.HS_Data_202007" />
+          <EntitySet Name="HS_Data_202008" EntityType="Self.HS_Data_202008" />
+          <EntitySet Name="HS_Data_202009" EntityType="Self.HS_Data_202009" />
+          <EntitySet Name="HS_Data_202010" EntityType="Self.HS_Data_202010" />
+          <EntitySet Name="LDN_HS_Data" EntityType="HighSpeed_JCBModel.LDN_HS_Data" />
+        </EntityContainer>
+        <EntityType Name="LDN_HS_Data">
+          <Key>
+            <PropertyRef Name="HSData_Id" />
+          </Key>
+          <Property Name="HSData_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lane_Id" Type="Byte" />
+          <Property Name="HSData_DT" Type="DateTime" Precision="3" />
+          <Property Name="Oper_Direc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Axle_Num" Type="Byte" />
+          <Property Name="AxleGrp_Num" Type="Byte" />
+          <Property Name="Gross_Load" Type="Int32" />
+          <Property Name="Veh_Type" Type="Int16" />
+          <Property Name="LWheel_1_W" Type="Int32" />
+          <Property Name="LWheel_2_W" Type="Int32" />
+          <Property Name="LWheel_3_W" Type="Int32" />
+          <Property Name="LWheel_4_W" Type="Int32" />
+          <Property Name="LWheel_5_W" Type="Int32" />
+          <Property Name="LWheel_6_W" Type="Int32" />
+          <Property Name="LWheel_7_W" Type="Int32" />
+          <Property Name="LWheel_8_W" Type="Int32" />
+          <Property Name="RWheel_1_W" Type="Int32" />
+          <Property Name="RWheel_2_W" Type="Int32" />
+          <Property Name="RWheel_3_W" Type="Int32" />
+          <Property Name="RWheel_4_W" Type="Int32" />
+          <Property Name="RWheel_5_W" Type="Int32" />
+          <Property Name="RWheel_6_W" Type="Int32" />
+          <Property Name="RWheel_7_W" Type="Int32" />
+          <Property Name="RWheel_8_W" Type="Int32" />
+          <Property Name="AxleDis1" Type="Int32" />
+          <Property Name="AxleDis2" Type="Int32" />
+          <Property Name="AxleDis3" Type="Int32" />
+          <Property Name="AxleDis4" Type="Int32" />
+          <Property Name="AxleDis5" Type="Int32" />
+          <Property Name="AxleDis6" Type="Int32" />
+          <Property Name="AxleDis7" Type="Int32" />
+          <Property Name="Violation_Id" Type="Int32" />
+          <Property Name="OverLoad_Sign" Type="Byte" />
+          <Property Name="Speed" Type="Int32" />
+          <Property Name="Acceleration" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Veh_Length" Type="Int32" />
+          <Property Name="QAT" Type="Decimal" Precision="14" Scale="4" />
+          <Property Name="License_Plate" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="License_Plate_Color" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="F7Code" Type="String" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Name="ExternInfo" Type="Single" />
+          <Property Name="Temp" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1720,7 +1861,6 @@
                 <ScalarProperty Name="F7Code" ColumnName="F7Code" />
                 <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
                 <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1920,544 +2060,592 @@
           <EntitySetMapping Name="HS_Data_201911">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_201911">
               <MappingFragment StoreEntitySet="HS_Data_201911">
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_201912">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_201912">
               <MappingFragment StoreEntitySet="HS_Data_201912">
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202001">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202001">
               <MappingFragment StoreEntitySet="HS_Data_202001">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202002">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202002">
               <MappingFragment StoreEntitySet="HS_Data_202002">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202003">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202003">
               <MappingFragment StoreEntitySet="HS_Data_202003">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202004">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202004">
               <MappingFragment StoreEntitySet="HS_Data_202004">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202005">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202005">
               <MappingFragment StoreEntitySet="HS_Data_202005">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202006">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202006">
               <MappingFragment StoreEntitySet="HS_Data_202006">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202007">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202007">
               <MappingFragment StoreEntitySet="HS_Data_202007">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202008">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202008">
               <MappingFragment StoreEntitySet="HS_Data_202008">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202009">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202009">
               <MappingFragment StoreEntitySet="HS_Data_202009">
-                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
-                <ScalarProperty Name="Temp" ColumnName="Temp" />
-                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
-                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
-                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
-                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
-                <ScalarProperty Name="QAT" ColumnName="QAT" />
-                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
-                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
-                <ScalarProperty Name="Speed" ColumnName="Speed" />
-                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
-                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
-                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
-                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
-                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
-                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
-                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
-                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
-                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
-                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
-                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
-                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
-                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
-                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
-                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
-                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
-                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
-                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
-                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
-                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
-                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
-                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
-                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
-                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
-                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
-                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
-                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
-                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
-                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
-                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
-                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
-                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
                 <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HS_Data_202010">
             <EntityTypeMapping TypeName="HighSpeed_JCBModel.HS_Data_202010">
               <MappingFragment StoreEntitySet="HS_Data_202010">
+                <ScalarProperty Name="HSData_Id" ColumnName="HSData_Id" />
+                <ScalarProperty Name="Lane_Id" ColumnName="Lane_Id" />
+                <ScalarProperty Name="HSData_DT" ColumnName="HSData_DT" />
+                <ScalarProperty Name="Oper_Direc" ColumnName="Oper_Direc" />
+                <ScalarProperty Name="Axle_Num" ColumnName="Axle_Num" />
+                <ScalarProperty Name="AxleGrp_Num" ColumnName="AxleGrp_Num" />
+                <ScalarProperty Name="Gross_Load" ColumnName="Gross_Load" />
+                <ScalarProperty Name="Veh_Type" ColumnName="Veh_Type" />
+                <ScalarProperty Name="LWheel_1_W" ColumnName="LWheel_1_W" />
+                <ScalarProperty Name="LWheel_2_W" ColumnName="LWheel_2_W" />
+                <ScalarProperty Name="LWheel_3_W" ColumnName="LWheel_3_W" />
+                <ScalarProperty Name="LWheel_4_W" ColumnName="LWheel_4_W" />
+                <ScalarProperty Name="LWheel_5_W" ColumnName="LWheel_5_W" />
+                <ScalarProperty Name="LWheel_6_W" ColumnName="LWheel_6_W" />
+                <ScalarProperty Name="LWheel_7_W" ColumnName="LWheel_7_W" />
+                <ScalarProperty Name="LWheel_8_W" ColumnName="LWheel_8_W" />
+                <ScalarProperty Name="RWheel_1_W" ColumnName="RWheel_1_W" />
+                <ScalarProperty Name="RWheel_2_W" ColumnName="RWheel_2_W" />
+                <ScalarProperty Name="RWheel_3_W" ColumnName="RWheel_3_W" />
+                <ScalarProperty Name="RWheel_4_W" ColumnName="RWheel_4_W" />
+                <ScalarProperty Name="RWheel_5_W" ColumnName="RWheel_5_W" />
+                <ScalarProperty Name="RWheel_6_W" ColumnName="RWheel_6_W" />
+                <ScalarProperty Name="RWheel_7_W" ColumnName="RWheel_7_W" />
+                <ScalarProperty Name="RWheel_8_W" ColumnName="RWheel_8_W" />
+                <ScalarProperty Name="AxleDis1" ColumnName="AxleDis1" />
+                <ScalarProperty Name="AxleDis2" ColumnName="AxleDis2" />
+                <ScalarProperty Name="AxleDis3" ColumnName="AxleDis3" />
+                <ScalarProperty Name="AxleDis4" ColumnName="AxleDis4" />
+                <ScalarProperty Name="AxleDis5" ColumnName="AxleDis5" />
+                <ScalarProperty Name="AxleDis6" ColumnName="AxleDis6" />
+                <ScalarProperty Name="AxleDis7" ColumnName="AxleDis7" />
+                <ScalarProperty Name="Violation_Id" ColumnName="Violation_Id" />
+                <ScalarProperty Name="OverLoad_Sign" ColumnName="OverLoad_Sign" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Acceleration" ColumnName="Acceleration" />
+                <ScalarProperty Name="Veh_Length" ColumnName="Veh_Length" />
+                <ScalarProperty Name="QAT" ColumnName="QAT" />
+                <ScalarProperty Name="License_Plate" ColumnName="License_Plate" />
+                <ScalarProperty Name="License_Plate_Color" ColumnName="License_Plate_Color" />
+                <ScalarProperty Name="F7Code" ColumnName="F7Code" />
+                <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
+                <ScalarProperty Name="Temp" ColumnName="Temp" />
                 <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LDN_HS_Data">
+            <EntityTypeMapping TypeName="HighSpeed_JCBModel.LDN_HS_Data">
+              <MappingFragment StoreEntitySet="LDN_HS_Data">
                 <ScalarProperty Name="Temp" ColumnName="Temp" />
                 <ScalarProperty Name="ExternInfo" ColumnName="ExternInfo" />
                 <ScalarProperty Name="F7Code" ColumnName="F7Code" />
