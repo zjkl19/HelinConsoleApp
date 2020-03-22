@@ -141,11 +141,11 @@ namespace HelinConsoleApp
 
                     var table = HS_DataForAnalysis;
 
-                    //IEnumerable<DailyTraffic> dailyTrafficData = DataProcessing.GetDailyTraffic(table, StartDataTime, FinishDataTime);
+                    IEnumerable<DailyTraffic> dailyTrafficData = DataProcessing.GetDailyTraffic(table, StartDataTime, FinishDataTime);
                     //var cc = table.Where(x => EntityFunctions.TruncateTime(x.HSData_DT)>= EntityFunctions.TruncateTime(StartDataTime)).Count();
 
                     //每日交通流量信息数据导入excel
-                    //var temp1 = ExportToExcelHelper.ExportDailyTrafficVolume(dailyTrafficData.ToList());
+                    var temp1 = ExportToExcelHelper.ExportDailyTrafficVolume(dailyTrafficData.ToList());
                     
                     //重量前10的车辆数据导入excel
                     List <MyHS_Data> data = table.Where(dataPredicate).OrderByDescending(x => x.Gross_Load).Take(10).ToList();
