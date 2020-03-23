@@ -81,8 +81,8 @@ namespace HelinConsoleApp
             var Gross_Load_Dist = new List<int>();
             var Gross_Load_Dist2 = new List<int>();
 
-            var StartDataTime = new DateTime(2020, 3, 1, 0, 0, 0);
-            var FinishDataTime = new DateTime(2020, 3, 21, 0, 0, 0);
+            var StartDataTime = new DateTime(2019, 12, 20, 0, 0, 0);
+            var FinishDataTime = new DateTime(2020, 1, 1, 0, 0, 0);
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
@@ -92,7 +92,7 @@ namespace HelinConsoleApp
                 {
                     #region HS_DataForAnalysis
                     var HS_DataForAnalysis = (
-                        from c in db.HS_Data_202003
+                        from c in db.HS_Data_201912
                         select new MyHS_Data
                         {
                             Acceleration = c.Acceleration,
@@ -135,7 +135,7 @@ namespace HelinConsoleApp
                             Gross_Load = c.Gross_Load
                         }
                         ).Union(
-                        from e in db.HS_Data_202004
+                        from e in db.HS_Data_202001
                         select new MyHS_Data
                         {
                             Acceleration = e.Acceleration,
