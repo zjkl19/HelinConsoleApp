@@ -81,7 +81,7 @@ namespace HelinConsoleApp
             var Gross_Load_Dist = new List<int>();
             var Gross_Load_Dist2 = new List<int>();
 
-            var StartDataTime = new DateTime(2020, 3, 21, 0, 0, 0);
+            var StartDataTime = new DateTime(2020, 4, 1, 0, 0, 0);
             var FinishDataTime = new DateTime(2020, 4, 16, 0, 0, 0);
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
