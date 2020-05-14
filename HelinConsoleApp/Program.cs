@@ -77,12 +77,12 @@ namespace HelinConsoleApp
 
             int t1, t2;
 
-            var Gross_Load_Div = new int[] { 0, 10_000, 30_000, 55_000 };
+            var Gross_Load_Div = new int[] { 0, 10_000, 30_000, 50_000 };
             var Gross_Load_Dist = new List<int>();
             var Gross_Load_Dist2 = new List<int>();
 
-            var StartDataTime = new DateTime(2020, 3, 21, 0, 0, 0);
-            var FinishDataTime = new DateTime(2020, 4, 16, 0, 0, 0);
+            var StartDataTime = new DateTime(2020, 4, 1, 0, 0, 0);
+            var FinishDataTime = new DateTime(2020, 5, 1, 0, 0, 0);
 
             //Expression<Func<HS_Data_201908, bool>> dataPredicate = x => x.HSData_DT >= StartDataTime && x.HSData_DT <= FinishDataTime;
 
@@ -205,6 +205,53 @@ namespace HelinConsoleApp
                     Console.WriteLine($"最大车重{g1},轴数{c1},轴距{l1}={maxGross_Load_Vehicle.AxleDis1}+{maxGross_Load_Vehicle.AxleDis2}" +
                         $"+{maxGross_Load_Vehicle.AxleDis3}+{maxGross_Load_Vehicle.AxleDis4}+{maxGross_Load_Vehicle.AxleDis5 }" +
                         $"+{maxGross_Load_Vehicle.AxleDis6}+{maxGross_Load_Vehicle.AxleDis7}");
+
+                    //统计30t及55t车辆的总数
+                    int[] GrossLoadDiv = { 30_000, 55000 };    //30t，55t
+                    int[] VehicleCounts = { 0, 0 };    //每个车道车辆总数
+                    int[,] VehicleCountsGreaterThanOrEqual = { { 0, 0 }, { 0, 0 } };    //例：第i行第j列表示第{i}个车道大于等于{j}kg数量的车辆
+                    decimal[,] VehicleCountsGreaterThanOrEqualRatio = { { 0.0m, 0.0m }, { 0.0m, 0.0m } };    //例：第i行第j列表示第{i}个车道大于等于{j}kg数量的车辆的比例
+
+                    for (int i=0;i<GrossLoadDiv.Length;i++)
+                    {
+                        VehicleCounts[i]= table.Where(dataPredicate).Where(x => x.Lane_Id == i+1).Count();
+                    }
+
+                    for (int i = 0; i < VehicleCountsGreaterThanOrEqual.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < VehicleCountsGreaterThanOrEqual.GetLength(1); j++)
+                        {
+                            temp = GrossLoadDiv[j];
+                            VehicleCountsGreaterThanOrEqual[i, j] = table.Where(dataPredicate).Where(x => x.Gross_Load >= temp && x.Lane_Id == i+1).Count();
+                            VehicleCountsGreaterThanOrEqualRatio[i, j] = Math.Round(Convert.ToDecimal(VehicleCountsGreaterThanOrEqual[i, j] * 100.0 / VehicleCounts[i] * 1.0), 2);
+                        }
+                    }
+
+
+                    try    //结果写入txt（以逗号分隔）
+                    {
+                        var fs = new FileStream("车道1 30t与55t车辆车辆统计数据.txt", FileMode.Create);
+                        var sw = new StreamWriter(fs, Encoding.Default);
+
+                        for (int i = 0; i < VehicleCountsGreaterThanOrEqual.GetLength(0); i++)
+                        {
+                            for (int j = 0; j < VehicleCountsGreaterThanOrEqual.GetLength(1); j++)
+                            {
+                                sw.WriteLine($"车道{i+1}：{GrossLoadDiv[j]/1000}t以上车辆数量：");
+                                sw.WriteLine($"{VehicleCountsGreaterThanOrEqual[i, j]}");
+                                sw.WriteLine($"车道{i + 1}：{GrossLoadDiv[j] / 1000}t以上车辆占比：");
+                                sw.WriteLine($"{VehicleCountsGreaterThanOrEqualRatio[i, j]}");
+                            }
+                        }
+
+                        sw.Close();
+                        fs.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
 
                     //车道1不同区间车重分布
                     for (int i = 0; i < Gross_Load_Div.Length; i++)
